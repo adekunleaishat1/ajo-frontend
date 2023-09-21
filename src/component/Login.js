@@ -90,6 +90,7 @@ const Login = () => {
             </div>
             <small className="text-danger">{formik.errors.password}</small>
           </div>
+           <p className="text-end"> <Link className="pass" to="/forgot" >Forgot Password ?</Link></p>
           <div className="but mt-4">
             <button type="submit" className="mx-auto w-100 p-2">
               Log in

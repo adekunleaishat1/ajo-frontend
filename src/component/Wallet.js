@@ -3,6 +3,7 @@ import {BiDollarCircle } from "react-icons/bi";
 import { verifypaymemt } from '../services/Alluser';
 import { useDispatch, useSelector } from 'react-redux';
 import { PaystackButton } from 'react-paystack';
+import { all } from 'axios';
 
 const Wallet = () => {
   const publicKey = "pk_test_a937907ad423ac18d530d435f6861d460d4ad42c"
@@ -104,7 +105,7 @@ const Wallet = () => {
             </div>
           </div>
           <div className="text-center mt-3 p-4">
-            <h2 className="fs-3 fw-bold">250.00 USD</h2>
+            <h2 className="fs-3 fw-bold">${alluser.wallet}</h2>
           </div>
           <div>
            <button className='mx-auto withdraw-but'>Withdraw</button>

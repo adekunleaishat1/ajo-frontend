@@ -9,6 +9,12 @@ import Dashboard  from './component/Dashboard';
 import Wallet from './component/Wallet';
 import Dash from './component/Dash';
 import Group from './component/Group';
+import Message from './component/Message';
+import Onegroup from './component/Onegroup';
+import Forgotpassword from './component/Forgotpassword';
+import Otp from './component/Otp';
+import Resetpassword from './component/Resetpassword';
+import Setpassword from './component/Setpassword';
 
 
 
@@ -20,11 +26,17 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
+          <Route path='/forgot' element={<Forgotpassword/>}/>
+          <Route path='/otp' element={<Otp/>}/>
+          <Route path='/reset' element={<Resetpassword/>}/>
+          <Route path='/set' element={<Setpassword/>}/>
           <Route path="/dashboard" element={<Dashboard/>}>
             <Route path="" element={<Dash/>}/>
             <Route path="wallet" element={<Wallet/>}/>
             <Route path="/dashboard/group/" element={<Group/>}/>
             <Route path='/dashboard/group/thrift' element={<CreateThrift/>}/>
+            <Route path='/dashboard/message' element={<Message/>}/>
+            <Route path='/dashboard/group/onegroup/:id' element={<Onegroup/>}/>
           </Route>
        </Routes>
        </div>

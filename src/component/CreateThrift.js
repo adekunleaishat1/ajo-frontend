@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { createThrift } from "../services/Alluser";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -13,6 +13,7 @@ const CreateThrift = () => {
   const [nopeople, setnopeople] = useState("");
   const [image, setimage] = useState("");
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   
 
@@ -57,10 +58,14 @@ const CreateThrift = () => {
       Authorization: `bearer ${token}`
     }
   }).then((res)=>{
-    console.log(res)
-  }).catch((err=>{
-    console.log(err)
-  }))
+    console.log(res.data)
+    console.log(res.data.contributionLink);
+    localStorage.setItem("link",JSON.stringify(res.data))
+    alert("Thrift created successfully")
+    // navigate('/dashboard/group')
+  }).catch((error)=>{
+    console.log("Error:", error)
+  })
   }
   return (
     <>

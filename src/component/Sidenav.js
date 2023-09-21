@@ -42,7 +42,7 @@ const Sidenav = () => {
           <Link to="wallet" style={linkStyles}> <h1 className='fs-5 px-2'><GiWallet/></h1>  <h1 className='fs-5 fw-semibold text-start'>Fund Wallet</h1></Link>
         </div>
         <div className='cont-side'>
-          <Link to="" style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Messages</h1></Link>
+          <Link to="message" style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Messages</h1></Link>
         </div>
         <div className='cont-side'>
           <Link to="" style={linkStyles}><h1 className='fs-5 px-2'><BiHistory/></h1> <h1 className='fs-5 fw-semibold text-start'>Track payments</h1></Link>

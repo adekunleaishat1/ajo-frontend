@@ -1,9 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { FaBell, FaSearch } from "react-icons/fa";
 import { AiTwotoneNotification } from "react-icons/ai";
 import { BsBookHalf} from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const Topnav = () => {
+  const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
+
+  useEffect(() => {
+    console.log(alluser);
+    console.log(alluser.username);
+  }, []) 
+
   return (
     <>
       <div className="topnav">
@@ -11,7 +19,7 @@ const Topnav = () => {
           <button>
             <FaSearch />
           </button>
-          <input type="text" placeholder="Search..." />
+          <input type="text"  placeholder="Search..." />
         </div>
         <div className="icon-div"> 
             <button className="icon">
@@ -24,7 +32,10 @@ const Topnav = () => {
               <FaBell className="bell-icon" />
             </button>
             <div className="icon_img">
-              <img src={require("../component/1-water-money-plant.png")} alt="" />
+              <div>
+                <h1>{alluser.username}</h1>
+              </div>
+              {/* <img src={require("../component/1-water-money-plant.png")} alt="" /> */}
             </div>
 
         </div>

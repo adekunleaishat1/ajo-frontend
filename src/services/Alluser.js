@@ -108,3 +108,51 @@ export const createThrift = (dispatch, value, token) =>{
        console.log(error); 
     }
 }
+ export const getThrift = (dispatch) =>{
+    dispatch(FetchingUser())
+    try {
+       axios.get(`http://localhost:8888/user/contribution`) 
+       .then((res)=>{
+        dispatch(FetchingSuccessful("thrift fetched successfully"))
+        console.log(res.data);
+       }).catch((err)=>{
+        console.log(err);
+       })
+    } catch (error) {
+        console.log(error);
+    }
+ }
+
+ export const forgotPassword = (dispatch, email) =>{
+    dispatch(postingUser())
+    try {
+        console.log(email, 45)
+       axios.post('http://localhost:8888/user/reset', {email:email},) 
+       .then((res)=>{
+        dispatch(postingSuccessful("post email successfully"))
+        console.log(res.data);
+       }).catch((err)=>{
+        dispatch(postingFailed(err.message))
+        console.log(err);
+       })
+    } catch (error) {
+        console.log(error);
+    }
+ }
+
+ export const resetpassword = (dispatch, details) =>{
+    dispatch(postingUser())
+    try {
+        console.log(details, 45)
+       axios.post('http://localhost:8888/user/change', details,) 
+       .then((res)=>{
+        dispatch(postingSuccessful("password reset successful"))
+        console.log(res.data);
+       }).catch((err)=>{
+        dispatch(postingFailed(err.message))
+        console.log(err);
+       })
+    } catch (error) {
+        console.log(error);
+    }
+ }
