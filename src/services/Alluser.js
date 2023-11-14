@@ -156,3 +156,4 @@ export const createThrift = (dispatch, value, token) =>{
         console.log(error);
     }
  }
+

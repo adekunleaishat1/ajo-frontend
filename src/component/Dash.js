@@ -1,15 +1,28 @@
 import React ,{useEffect, useState}from 'react'
 import { BiBookAdd, BiDollarCircle } from "react-icons/bi";
 import {CiWavePulse1} from "react-icons/ci"
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { verifyuser } from '../services/Alluser';
 
 const Dash = () => {
   const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
   const [userdetails, setUserdetails] = useState("");
   const [wallet, setwallet] = useState("")
+  const dispatch = useDispatch()
+
+   useEffect(() => {
+
+      dispatch(verifyuser);
+      console.log(dispatch);
+
+   }, [dispatch])
+   
   useEffect(() => {
     console.log(alluser);
-  }, []) 
+    setUserdetails(alluser)
+    console.log(userdetails);
+    setwallet(alluser.wallet)
+  }, [alluser]) 
 
   
   return (
@@ -24,7 +37,7 @@ const Dash = () => {
                 </div>
               </div>
               <div className="text-center mt-3 p-4">
-                <h2 className="fs-3 fw-bold">${alluser.wallet}</h2>
+                <h2 className="fs-3 fw-bold">${wallet}</h2>
               </div>
             </div>
             <div className="money-div">

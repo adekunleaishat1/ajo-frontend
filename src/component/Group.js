@@ -24,14 +24,14 @@ const Group = () => {
   }, []);
   // console.log(allthrift);
   useEffect(() => {
-    // setTimeout(() => {
+   
       console.log(allthrift);
       if (allthrift) {
         console.log(allthrift);
         setthrifts(allthrift);
         console.log(thrifts);
       }
-    // }, 5000);
+ 
   }, [allthrift]);
 
   

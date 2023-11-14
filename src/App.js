@@ -15,6 +15,7 @@ import Forgotpassword from './component/Forgotpassword';
 import Otp from './component/Otp';
 import Resetpassword from './component/Resetpassword';
 import Setpassword from './component/Setpassword';
+import Notfound from './component/Notfound';
 
 
 
@@ -23,17 +24,18 @@ function App() {
     <>
        <div>
        <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/'element={<Home/>}/>
+          <Route path='/*'element={<Notfound/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/forgot' element={<Forgotpassword/>}/>
           <Route path='/otp' element={<Otp/>}/>
-          <Route path='/reset' element={<Resetpassword/>}/>
+          <Route path='/reset/:inputsString' element={<Resetpassword/>}/>
           <Route path='/set' element={<Setpassword/>}/>
           <Route path="/dashboard" element={<Dashboard/>}>
             <Route path="" element={<Dash/>}/>
             <Route path="wallet" element={<Wallet/>}/>
-            <Route path="/dashboard/group/" element={<Group/>}/>
+            <Route path="/dashboard/group" element={<Group/>}/>
             <Route path='/dashboard/group/thrift' element={<CreateThrift/>}/>
             <Route path='/dashboard/message' element={<Message/>}/>
             <Route path='/dashboard/group/onegroup/:id' element={<Onegroup/>}/>

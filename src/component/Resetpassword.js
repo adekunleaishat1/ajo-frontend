@@ -2,31 +2,63 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { resetpassword } from "../services/Alluser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import {
+  postingUser,
+  postingSuccessful,
+  postingFailed,
+} from '../Redux/AlluserSlice'
+
 
 const Resetpassword = () => {
-  const { isposting, postingsuccess, postingerror } = useSelector(
-    (state) => state.AlluserSlice
-  );
+  const navigate = useNavigate()
+  const {inputsString} = useParams()
+  // const opt = route
+  // const { isposting, postingsuccess, postingerror } = useSelector(
+  //   (state) => state.AlluserSlice
+  // );
   const [c_password, setc_password] = useState("");
   const [showing, setshowing] = useState(false);
   const [Show, setshow] = useState(false);
-  const [OTP, setOTP] = useState("");
+  const [OTP, setOTP] = useState(inputsString);
   const [password, setpassword] = useState("");
 
   const dispatch = useDispatch();
+  
 
   const reset = () => {
-    let details = {
-      OTP: OTP,
-      password: password,
-    };
-    console.log(details);
-    dispatch(resetpassword, details);
-    resetpassword(dispatch, details);
-    if (postingsuccess) {
-      alert("you have sucessfully reset your password");
+    if (password !== c_password) {
+      alert("password doesn't match")
+    }else{
+      let details = {
+        OTP: OTP,
+        password: password,
+      };
+      try {
+        console.log(details);
+        dispatch(postingUser())
+      axios.post("http://localhost:8888/user/change",details)
+      .then((res)=>{
+        dispatch(postingSuccessful(res.data))
+        alert("password updated successfully")
+         navigate("/set")
+      }).catch((err)=>{
+        dispatch(postingFailed())
+        console.log(err);
+      })
+        
+      } catch (error) {
+        console.log(error);
+      }
+      
     }
+    
+    // dispatch(resetpassword, details);
+    // resetpassword(dispatch, details);
+    // if (postingsuccess) {
+    //   alert("you have sucessfully reset your password");
+    // }
   };
 
   const show = () => {
@@ -38,6 +70,7 @@ const Resetpassword = () => {
   return (
     <>
       <div className="d-flex justify-content-center align-items-center content">
+        <div className="body2">
         <div className="iner-body">
           <div className="iner-body2">
             <div className="forg-cont">
@@ -81,6 +114,7 @@ const Resetpassword = () => {
               </button>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </>

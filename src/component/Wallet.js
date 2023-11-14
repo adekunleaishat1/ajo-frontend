@@ -3,7 +3,12 @@ import {BiDollarCircle } from "react-icons/bi";
 import { verifypaymemt } from '../services/Alluser';
 import { useDispatch, useSelector } from 'react-redux';
 import { PaystackButton } from 'react-paystack';
-import { all } from 'axios';
+import axios from 'axios';
+import {
+  postingUser,
+  postingSuccessful,
+  postingFailed,
+} from '../Redux/AlluserSlice'
 
 const Wallet = () => {
   const publicKey = "pk_test_a937907ad423ac18d530d435f6861d460d4ad42c"
@@ -47,6 +52,7 @@ const Wallet = () => {
       backgroundColor: 'white'
     });
   }
+  
    useEffect(() => {
     console.log(alluser);
     setemail(alluser.email)
@@ -60,7 +66,23 @@ const Wallet = () => {
       reference: reference.reference,
       amount: amount, 
      };
-     verifypaymemt(dispatch, data)
+     const token = localStorage.getItem("token");
+     try {
+      axios.post("http://localhost:8888/user/pay", data,{
+          headers: {
+              Authorization: `Bearer ${token}` 
+          }
+      }).then((res) => {
+        dispatch(postingSuccessful("Payment verification successful"));
+        console.log(res.data);
+        alert("Payment Verification Successful");
+      }).catch((err) => {
+        dispatch(postingFailed(err.message));
+        console.log(err.message);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   
    }
  
