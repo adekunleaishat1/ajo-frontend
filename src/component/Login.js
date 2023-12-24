@@ -42,7 +42,7 @@ const Login = () => {
     }),
     onSubmit: (value) => {
       console.log(value);
-      axios.post("http://localhost:8888/user/login", value).then((res) => {
+      axios.post("https://ajo-backend.onrender.com/user/login", value).then((res) => {
         dispatch(postingSuccessful(res.data));
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
@@ -54,7 +54,8 @@ const Login = () => {
       })
     },
   });
-  console.log(formik.errors);
+  // console.log(formik.errors);
+  // console.log(formik.touched);
   return (
     <>
       <div className="content">
@@ -69,10 +70,11 @@ const Login = () => {
             <input
               className=" inp1"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="username"
               type="text"
             />
-            <small className="text-danger">{formik.errors.username}</small>
+            <small className="text-danger">{formik.touched.username && formik.errors.username ? formik.errors.username : ""}</small>
           </div>
           <div className="form-group mt-3">
             <label className="label" htmlFor="password">
@@ -82,13 +84,14 @@ const Login = () => {
               <input
                 name="password"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type={showing ? "text" : "password"}
               />
               <button type="button" onClick={show} className="eye">
                 {showing ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
-            <small className="text-danger">{formik.errors.password}</small>
+            <small className="text-danger">{formik.touched.password && formik.errors.password ? formik.errors.password : ""}</small>
           </div>
            <p className="text-end"> <Link className="pass" to="/forgot" >Forgot Password ?</Link></p>
           <div className="but mt-4">
@@ -96,7 +99,7 @@ const Login = () => {
               Log in
             </button>
           </div>
-          <p className="text-center mt-3 dont">
+          <p className="text-center mt-1 dont">
             Don't have an account?{" "}
             <Link className="lik" to="/signup">
               Sign Up

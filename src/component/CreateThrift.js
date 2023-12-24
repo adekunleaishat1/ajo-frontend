@@ -53,7 +53,7 @@ const CreateThrift = () => {
   //   //  dispatch(createThrift);
   //   createThrift(dispatch, value, token)
   //  }
-  axios.post("http://localhost:8888/user/contribution", value, {
+  axios.post("https://ajo-backend.onrender.com/user/contribution", value, {
     headers:{
       Authorization: `bearer ${token}`
     }
@@ -154,7 +154,7 @@ const CreateThrift = () => {
           </div>
 
           <div className="but mt-4">
-            <button type="button" onClick={create} className="mx-auto w-50 p-2"> create </button>
+            <button type="button" onClick={create} className="mx-auto w-50 p-2">create</button>
           </div>
           <p className="text-center mt-2 dont">
             Don't have an account?{" "}

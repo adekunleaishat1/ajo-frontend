@@ -10,7 +10,7 @@ export const getnotification = (dispatch) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
     try {
-        axios.get("http://localhost:8888/user/notify",
+        axios.get("https://ajo-backend.onrender.com/user/notify",
         {
             headers:{
                 Authorization: `bearer ${token}`
@@ -27,21 +27,3 @@ export const getnotification = (dispatch) =>{
     }
  } 
 
- export const update = (dispatch) =>{
-    const token = localStorage.getItem("token");
-    try {
-        axios.post("http://localhost:8888/user/update",
-        {isread: true},
-        {
-            headers:{
-                Authorization: `bearer ${token}`
-            }
-        }).then((res)=>{
-            console.log(res);
-        }).catch((err)=>{
-            console.log(err);
-        })
-    } catch (error) {
-        console.log(error);
-    }
- }

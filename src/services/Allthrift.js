@@ -7,7 +7,7 @@ import {
     GettingSuccessful,
     GettingThrift
 } from '../Redux/AllthriftSlice'
-let endpoint = "http://localhost:8888"
+let endpoint = "https://ajo-backend.onrender.com"
 let token = localStorage.getItem("token")
 
 export const getThrift = (dispatch) =>{

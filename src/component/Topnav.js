@@ -49,7 +49,7 @@ const Topnav = () => {
    const Read = () =>{
       const token = localStorage.getItem("token");
       try {
-          axios.post("http://localhost:8888/user/update",
+          axios.post("https://ajo-backend.onrender.com/user/update",
           {isread: true},
           {
               headers:{

@@ -13,7 +13,7 @@ export const loguser = (dispatch, value) =>{
     return new Promise((resolve, reject)=>{
          try {
             dispatch(postingUser())
-            axios.post("http://localhost:8888/user/login", value).then((res)=>{
+            axios.post("https://ajo-backend.onrender.com/user/login", value).then((res)=>{
                 dispatch(postingSuccessful(res.data))
                 console.log(res.data);
                 resolve()
@@ -33,7 +33,7 @@ export const loguser = (dispatch, value) =>{
 export const postuser = (dispatch, data) =>{
     dispatch(postingUser())
     try {
-     axios.post("http://localhost:8888/user/signup", data).then((res)=>{
+     axios.post("https://ajo-backend.onrender.com/user/signup", data).then((res)=>{
         dispatch(postingSuccessful("created successfully"))
         console.log(res.data);
         alert("Posting Successful")
@@ -49,7 +49,7 @@ export const verifyuser = (dispatch) =>{
     dispatch(FetchingUser())
     const token = localStorage.getItem("token");
         try {
-            axios.get("http://localhost:8888/user/verify",
+            axios.get("https://ajo-backend.onrender.com/user/verify",
                 {
                     headers:{
                         Authorization: `bearer ${token}`
@@ -69,7 +69,7 @@ export const verifypaymemt = (dispatch, data) =>{
     dispatch(postingUser())
     const token = localStorage.getItem("token");
     try {
-        axios.post("http://localhost:8888/user/pay", data,{
+        axios.post("https://ajo-backend.onrender.com/user/pay", data,{
             headers: {
                 Authorization: `Bearer ${token}` 
             }
@@ -92,7 +92,7 @@ export const createThrift = (dispatch, value, token) =>{
       dispatch(postingUser())
     //   const token = localstorage.getItem("token");
     try {
-       axios.post("http://localhost:8888/user/contribution", value,{
+       axios.post("https://ajo-backend.onrender.com/user/contribution", value,{
         headers:{
             Authorization: `bearer ${token}`
         }
@@ -111,7 +111,7 @@ export const createThrift = (dispatch, value, token) =>{
  export const getThrift = (dispatch) =>{
     dispatch(FetchingUser())
     try {
-       axios.get(`http://localhost:8888/user/contribution`) 
+       axios.get(`https://ajo-backend.onrender.com/user/contribution`) 
        .then((res)=>{
         dispatch(FetchingSuccessful("thrift fetched successfully"))
         console.log(res.data);
@@ -127,7 +127,7 @@ export const createThrift = (dispatch, value, token) =>{
     dispatch(postingUser())
     try {
         console.log(email, 45)
-       axios.post('http://localhost:8888/user/reset', {email:email},) 
+       axios.post('https://ajo-backend.onrender.com/user/reset', {email:email},) 
        .then((res)=>{
         dispatch(postingSuccessful("post email successfully"))
         console.log(res.data);
@@ -144,7 +144,7 @@ export const createThrift = (dispatch, value, token) =>{
     dispatch(postingUser())
     try {
         console.log(details, 45)
-       axios.post('http://localhost:8888/user/change', details,) 
+       axios.post('https://ajo-backend.onrender.com/user/change', details,) 
        .then((res)=>{
         dispatch(postingSuccessful("password reset successful"))
         console.log(res.data);

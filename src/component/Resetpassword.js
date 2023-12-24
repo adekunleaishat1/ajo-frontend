@@ -38,7 +38,7 @@ const Resetpassword = () => {
       try {
         console.log(details);
         dispatch(postingUser())
-      axios.post("http://localhost:8888/user/change",details)
+      axios.post("https://ajo-backend.onrender.com/user/change",details)
       .then((res)=>{
         dispatch(postingSuccessful(res.data))
         alert("password updated successfully")

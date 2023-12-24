@@ -20,7 +20,7 @@ const Forgotpassword = () => {
   const sendemail = async (res) => {
     console.log(email);
     axios
-      .post("http://localhost:8888/user/reset", { email: email })
+      .post("https://ajo-backend.onrender.com/user/reset", { email: email })
       .then((res) => {
         dispatch(postingSuccessful());
         localStorage.setItem("otp", JSON.stringify(res.data.OTP));

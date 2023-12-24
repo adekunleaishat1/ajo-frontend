@@ -68,7 +68,7 @@ const Wallet = () => {
      };
      const token = localStorage.getItem("token");
      try {
-      axios.post("http://localhost:8888/user/pay", data,{
+      axios.post("https://ajo-backend.onrender.com/user/pay", data,{
           headers: {
               Authorization: `Bearer ${token}` 
           }
