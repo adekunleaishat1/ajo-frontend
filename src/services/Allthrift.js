@@ -9,14 +9,17 @@ import {
 } from '../Redux/AllthriftSlice'
 let endpoint = "https://ajo-backend.onrender.com"
 let token = localStorage.getItem("token")
+console.log(token);
 
 export const getThrift = (dispatch) =>{
     dispatch(GettingThrift())
     try {
        axios.get(`${endpoint}/user/contribution`,{
-        headers:{
-            Authorization: `bearer ${token}`
-        }
+            headers:{
+                "Authorization":`bearer ${token}`,
+                "Content-Type": "application/json",
+                "accept": "application/json"
+              }
        }) 
        .then((res)=>{
         dispatch(GettingSuccessful(res.data.Allcontribution))

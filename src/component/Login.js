@@ -40,9 +40,10 @@ const Login = () => {
         .min(8, "password too short")
         .required("This field is required"),
     }),
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value);
-      axios.post("https://ajo-backend.onrender.com/user/login", value).then((res) => {
+      try {
+    await  axios.post("https://ajo-backend.onrender.com/user/login", value).then((res) => {
         dispatch(postingSuccessful(res.data));
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
@@ -52,6 +53,9 @@ const Login = () => {
         console.log(err);
         alert(err.message)
       })
+      } catch (error) {
+        console.log(error);
+      }  
     },
   });
   // console.log(formik.errors);

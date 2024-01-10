@@ -51,8 +51,8 @@ const Signup = () => {
         bvn:yup.number().min(10).required("This field is required"),
         password:yup.string().min(8, "password too short").required("This field is required")
        }),
-       onSubmit: (data) =>{
-        postuser(dispatch, data);
+       onSubmit: async (data) =>{
+       await postuser(dispatch, data);
         navigate("/login")
        }
      

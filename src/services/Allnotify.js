@@ -13,8 +13,10 @@ export const getnotification = (dispatch) =>{
         axios.get("https://ajo-backend.onrender.com/user/notify",
         {
             headers:{
-                Authorization: `bearer ${token}`
-            }
+                "Authorization":`bearer ${token}`,
+                "Content-Type": "application/json",
+                "accept": "application/json"
+             }
         }).then((res)=>{
             console.log(res.data.notify);
             dispatch(Gettingnotifysuccessful(res.data.notify))
