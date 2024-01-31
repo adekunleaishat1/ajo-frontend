@@ -13,7 +13,7 @@ const Onegroup = () => {
 
   const { isfetching, onethrift, fetchingerror,} = useSelector((state) => state.AllthriftSlice);
   const linkToShare = "http://localhost:3000/dashboard/group/onegroup/64ee069afe11bbc2a577447f"
-  const url = `http://localhost:3000/join/{id}`
+  const url = `https://ajo-frontend-teal.vercel.app/join/${id}`
   const message = `Check out this amazing website: ${url}`;
   const dispatch = useDispatch();
   // const get = JSON.parse(localStorage.getItem("link"));
@@ -74,7 +74,7 @@ const Onegroup = () => {
               <th>Share</th>
             </tr>
             <tr>
-              <td ref={linkRef}>http://localhost:3000/join/{id}</td>
+              <td ref={linkRef}>https://ajo-frontend-teal.vercel.app/join/{id}</td>
               <td className="text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><FaShare size="20px"/></td>
             </tr>
           </table>
