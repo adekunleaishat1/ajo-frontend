@@ -14,12 +14,12 @@ const Dashboard = () => {
   useEffect(() => {
     console.log(alluser);
     const usertoken = localStorage.getItem("token");
-    if (fetchingerror) {
+    if (!usertoken) {
       console.log(fetchingerror);
-      localStorage.removeItem("token");
+      // localStorage.removeItem("token");
       navigate("/login");
     } else {
-      dispatch(verifyuser);
+      verifyuser(dispatch)
     }
   }, []);
 

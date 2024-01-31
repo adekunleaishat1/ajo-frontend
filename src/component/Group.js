@@ -11,7 +11,8 @@ const Group = () => {
   const { isgetting, allthrift, gettingerror } = useSelector(
     (state) => state.AllthriftSlice
   );
-
+  console.log(allthrift);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     getThrift(dispatch);
@@ -19,10 +20,10 @@ const Group = () => {
     if (gettingerror) {
       alert("error fetching data");
     } else {
-      // dispatch(getThrift)
+      dispatch(getThrift)
     }
   }, []);
-  // console.log(allthrift);
+  console.log(allthrift);
   useEffect(() => {
    
       console.log(allthrift);

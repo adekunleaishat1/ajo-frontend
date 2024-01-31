@@ -52,15 +52,15 @@ export const AllthriftSlice = createSlice ({
         },
         FetchingThrift: (state) =>{
             state.isgetting = true;
-            state.allthrift = null;
+            state.onethrift = null;
             state.gettingerror = null;
         },
-        FetchingSuccessful: (state,action) =>{
+        FetchingthriftSuccessful: (state,action) =>{
             state.isgetting = false;
             state.onethrift = action.payload;
             state.gettingerror = null;
         },
-        FetchingFailed: (state, action) =>{
+        FetchingthriftFailed: (state, action) =>{
             state.isgetting = false;
             state.onethrift = null;
             state.gettingerror = action.payload;
@@ -83,7 +83,7 @@ export const {
     GettingSuccessful,
     GettingThrift,
     FetchingThrift,
-    FetchingSuccessful,
-    FetchingFailed,
+    FetchingthriftSuccessful,
+    FetchingthriftFailed,
 
 } = AllthriftSlice.actions

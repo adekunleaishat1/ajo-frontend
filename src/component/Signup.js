@@ -2,8 +2,12 @@ import React,{useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {FaEye, FaEyeSlash} from "react-icons/fa"
 import { postuser } from '../services/Alluser'
+import { postingFailed, postingUser, postingSuccessful } from '../Redux/AlluserSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 import * as yup from 'yup'
 
 
@@ -51,48 +55,77 @@ const Signup = () => {
         bvn:yup.number().min(10).required("This field is required"),
         password:yup.string().min(8, "password too short").required("This field is required")
        }),
-       onSubmit: async (data) =>{
-       await postuser(dispatch, data);
-        navigate("/login")
+       onSubmit:async (data) =>{
+        console.log(data);
+        try {
+          dispatch(postingUser())
+       await axios.post("https://ajo-backend.onrender.com/user/signup", data).then((res)=>{
+            dispatch(postingSuccessful(res.data.message))
+            toast.success(res.data.message)
+            setTimeout(()=>{
+              navigate("/login")
+            },[5000])
+            formik.setValues({
+              username: "", 
+              email: "",
+              bvn: "",
+              password: "",
+            });
+            console.log(formik.values);
+        }).catch((err)=>{
+            dispatch(postingFailed(err.response.data.message))
+            toast.error(err.response.data.message)
+            formik.setValues({
+              username: "", 
+              email: "",
+              bvn: "",
+              password: "",
+            });
+            console.log(formik.values);
+        })
+        } catch (error) {
+           console.log(error)
+        }
        }
      
     })
-    console.log(formik.errors)
-    console.log(formik.touched);
+    // console.log(formik.errors)
+    // console.log(formik.touched);
   return (
     <>
       <div className='content'>
       <form onSubmit={formik.handleSubmit} className=' form-cont2' action="">
-        {postingerror? postingerror: null}
-        {postingsuccess? postingsuccess: null}
+        {/* {postingerror? postingerror: null}
+        {postingsuccess? postingsuccess: null} */}
             <div className='log1'>
               <h1 className='text-center'>Create account</h1>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="username">Username</label>
-               <input className='inp1' name='username' id='username' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
+               <input value={formik.values.username} className='inp1' name='username' id='username' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
                <small className='text-danger'>{formik.touched.username && formik.errors.username? formik.errors.username : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="email">Email</label>
-               <input className='inp1' name='email' id='email' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
+               <input value={formik.values.email} className='inp1' name='email' id='email' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
                <small className='text-danger'>{formik.touched.email && formik.errors.email? formik.errors.email : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="bvn">Bvn</label>
-               <input className=' inp1' name='bvn' id='bvn' onBlur={formik.handleBlur} onChange={formik.handleChange} type="number" />
+               <input value={formik.values.bvn} className=' inp1' name='bvn' id='bvn' onBlur={formik.handleBlur} onChange={formik.handleChange} type="number" />
                <small className='text-danger'>{formik.touched.bvn && formik.errors.bvn? formik.errors.bvn : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="password">Password</label>
                 <div className='d-flex justify-content-between align-items-center inp'>
-                 <input name='password' id='password' onBlur={formik.handleBlur} onChange={formik.handleChange} type={showing?"text":"password"} />
+                 <input value={formik.values.password} name='password' id='password' onBlur={formik.handleBlur} onChange={formik.handleChange} type={showing?"text":"password"} />
                  <button type='button' onClick={show} className='eye'>{showing? <FaEye />: <FaEyeSlash/>}</button> 
                 </div>
                 <small className='text-danger'>{formik.touched.password && formik.errors.password? formik.errors.password : ""}</small>
             </div>
             <div className='but mt-4'>
-                <button type='submit' className='mx-auto w-100 p-2'>{isposting? "Loading": "Sign up"}</button>
+                <button type='submit' className='mx-auto w-100 p-2'>{isposting? "Loading...": "Sign up"}</button>
+                <ToastContainer/>
             </div>
             <p className='text-center mt-2 dont'>Already have an account? <Link className='lik' to="/login">Sign In</Link> </p>
           </form>

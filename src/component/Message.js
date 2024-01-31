@@ -56,13 +56,16 @@ const Message = () => {
               </>
             ))
            }
-           {
-            
+           {pages.length == 5 &&
+              
+               (
+                <div className="d-flex justify-content-between align-items-center mt-1">
+                <button onClick={viewless} className="btn btn-lignt rounded"><AiOutlineDoubleLeft/></button>
+                <button onClick={viewmore} className="btn btn-lignt rounded"><AiOutlineDoubleRight/></button>
+                </div>
+               )
            }
-          <div className="d-flex justify-content-between align-items-center mt-1">
-          <button onClick={viewless} className="btn btn-lignt rounded"><AiOutlineDoubleLeft/></button>
-          <button onClick={viewmore} className="btn btn-lignt rounded"><AiOutlineDoubleRight/></button>
-          </div>
+          
         </div>
         
       </div>

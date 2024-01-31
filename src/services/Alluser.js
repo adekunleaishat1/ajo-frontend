@@ -52,7 +52,7 @@ export const verifyuser = (dispatch) =>{
             axios.get("https://ajo-backend.onrender.com/user/verify",
                 {
                     headers:{
-                        Authorization: `bearer ${token}`
+                        "Authorization": `bearer ${token}`
                     }
                 }).then((res)=>{
                     console.log(res.data);
@@ -63,6 +63,7 @@ export const verifyuser = (dispatch) =>{
                 })
         } catch (error) {
             console.log(error);
+            dispatch(FetchingFailed(error.message))
         }
 }
 export const verifypaymemt = (dispatch, data) =>{

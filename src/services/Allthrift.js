@@ -5,7 +5,10 @@ import {
     PostingThrift,
     GettingFailed,
     GettingSuccessful,
-    GettingThrift
+    GettingThrift,
+    FetchingThrift,
+    FetchingthriftSuccessful,
+    FetchingthriftFailed
 } from '../Redux/AllthriftSlice'
 let endpoint = "https://ajo-backend.onrender.com"
 let token = localStorage.getItem("token")
@@ -26,7 +29,7 @@ export const getThrift = (dispatch) =>{
         console.log(res.data);
        }).catch((err)=>{
         console.log(err);
-        dispatch(GettingFailed(err.message))
+        // dispatch(GettingFailed(err.res.data.message))
        })
     } catch (error) {
         console.log(error);
@@ -34,18 +37,19 @@ export const getThrift = (dispatch) =>{
     }
 }
 export const getOnethrift = (dispatch, id) =>{
-    dispatch(GettingThrift())
+    dispatch(FetchingThrift())
     try {
-        axios.get(`${endpoint}/user/contribution/${id}`) 
+        axios.get(`${endpoint}/user/onecontribution/${id}`) 
        .then((res)=>{
-        dispatch(GettingSuccessful(res.data))
+        dispatch( FetchingthriftSuccessful(res.data.contribution))
+        console.log(res);
         console.log(res.data);
        }).catch((err)=>{
         console.log(err);
-        dispatch(GettingFailed(err.message))
+        dispatch(FetchingthriftFailed(err.message))
        })
     } catch (error) {
         console.log(error);
-        dispatch(GettingFailed(error.message))
+        dispatch(FetchingthriftFailed(error.message))
     }
 }

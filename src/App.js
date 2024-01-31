@@ -16,6 +16,7 @@ import Otp from './component/Otp';
 import Resetpassword from './component/Resetpassword';
 import Setpassword from './component/Setpassword';
 import Notfound from './component/Notfound';
+import JoinGroup from './component/JoinGroup';
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/*'element={<Notfound/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
+          <Route path='/join/:id' element={<JoinGroup/>}/>
           <Route path='/forgot' element={<Forgotpassword/>}/>
           <Route path='/otp' element={<Otp/>}/>
           <Route path='/reset/:inputsString' element={<Resetpassword/>}/>
