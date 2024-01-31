@@ -97,7 +97,7 @@ const Onegroup = () => {
             <FaTwitter  size="40px"/>
            </div>
            <div className="col">
-            <Link to={`https://wa.me/?text=${message}`}><RiWhatsappFill  size="40px"/></Link>
+            <a href={`https://wa.me/?text=${message}`} target="_blank"><RiWhatsappFill  size="40px"/></a>
            </div>
            <div onClick={copytoclipboard} className="col">
            <FaCopy size="40px"/>
