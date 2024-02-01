@@ -782,6 +782,14 @@
     border-radius: 100%;
     box-shadow: 1px 1px 5px rgb(193, 194, 196);
   }
+  .paystack{
+    background-color: #18217A;
+    color: white;
+    border: none;
+    font-size: 14px;
+    border-radius: 10px ;
+    padding: 10px 10px;
+  }
   
 @media (max-width:1200px) {
   .disp{

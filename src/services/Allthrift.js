@@ -29,7 +29,7 @@ export const getThrift = (dispatch) =>{
         console.log(res.data);
        }).catch((err)=>{
         console.log(err);
-        // dispatch(GettingFailed(err.res.data.message))
+        dispatch(GettingFailed(err.response.data.message))
        })
     } catch (error) {
         console.log(error);
@@ -41,7 +41,7 @@ export const getOnethrift = (dispatch, id) =>{
     try {
         axios.get(`${endpoint}/user/onecontribution/${id}`) 
        .then((res)=>{
-        dispatch( FetchingthriftSuccessful(res.data.contribution))
+        dispatch(FetchingthriftSuccessful(res.data.contribution))
         console.log(res);
         console.log(res.data);
        }).catch((err)=>{

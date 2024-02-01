@@ -114,7 +114,7 @@ const Wallet = () => {
              <input onChange={((e)=>setamount(e.target.value * 100))} className='form-control' name='name' type="number" placeholder='Amount' />
             </div>
             {/* <button onClick={ payWithPaystack} className='btn btn-secondary mx-auto'> */}
-             <PaystackButton style={{backgroundColor: "blue"}}
+             <PaystackButton className='paystack' style={{backgroundColor: "blue"}}
               {...componentProps} />
             {/* </button> */}
            </div>
