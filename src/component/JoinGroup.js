@@ -66,8 +66,8 @@ const JoinGroup = () => {
     <>
       <div className="joingroup-bg">
         <div className="join-div">
-          <h1 className="text-center">joingroup</h1>
-          <div className="d-flex justify-content-between align-items-center px-5">
+          <h1 className="text-center fs-3">Joingroup</h1>
+          <div className="d-flex justify-content-between align-items-center px-5 mt-5">
             <div className="join-img">
               <img
                 className="rounded-pil img-fluid"
@@ -82,8 +82,10 @@ const JoinGroup = () => {
               <p>{onethrift && onethrift.plan}</p>
             </div>
           </div>
-          <button onClick={joingroup} className="btn btn-success mx-auto mt-3">{isloading? "loading..." : "Join Group"}</button>
-          <ToastContainer/>
+          <div>
+           <button onClick={joingroup} className="btn btn-success mx-auto mt-3">{isloading? "loading..." : "Join Group"}</button>
+           <ToastContainer/>
+          </div>
         </div>
       </div>
     </>

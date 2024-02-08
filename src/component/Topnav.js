@@ -37,9 +37,9 @@ const Topnav = () => {
   }, [alluser]) 
   useEffect(() => {
     
-  getnotification(dispatch)
+  dispatch(getnotification)
    
-  }, [])
+  }, [dispatch])
   
 
    useEffect(() => {

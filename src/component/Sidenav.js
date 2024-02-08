@@ -5,6 +5,7 @@ import {FaUsers} from 'react-icons/fa'
 import {GiWallet} from 'react-icons/gi'
 import {IoMdMail, IoMdSettings} from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 
 const Sidenav = () => {
@@ -22,6 +23,25 @@ const Sidenav = () => {
     localStorage.removeItem('token'); 
     window.location.href = '/login';
   };
+   const handlenotify = () =>{
+    const token = localStorage.getItem("token");
+    try {
+        axios.post("https://ajo-backend.onrender.com/user/update",
+        {isread: true},
+        {
+            headers:{
+                Authorization: `bearer ${token}`
+            }
+        }).then((res)=>{
+            console.log(res);
+            navigate('/message') 
+        }).catch((err)=>{
+            console.log(err);
+        })
+    } catch (error) {
+        console.log(error);
+    }
+   }
   return (
     <>
       <div className='side'>
@@ -42,7 +62,7 @@ const Sidenav = () => {
           <Link to="wallet" style={linkStyles}> <h1 className='fs-5 px-2'><GiWallet/></h1>  <h1 className='fs-5 fw-semibold text-start'>Fund Wallet</h1></Link>
         </div>
         <div className='cont-side'>
-          <Link to="message" style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Notifications</h1></Link>
+          <Link  onClick={handlenotify} style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Notifications</h1></Link>
         </div>
         <div className='cont-side'>
           <Link to="" style={linkStyles}><h1 className='fs-5 px-2'><BiHistory/></h1> <h1 className='fs-5 fw-semibold text-start'>Track payments</h1></Link>

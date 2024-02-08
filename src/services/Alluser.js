@@ -45,6 +45,7 @@ export const postuser = (dispatch, data) =>{
        console.log(error)
     }
 }
+
 export const verifyuser = (dispatch) =>{
     dispatch(FetchingUser())
     const token = localStorage.getItem("token");

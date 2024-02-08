@@ -16,7 +16,7 @@ const Dashboard = () => {
     const usertoken = localStorage.getItem("token");
     if (!usertoken) {
       console.log(fetchingerror);
-      // localStorage.removeItem("token");
+      localStorage.removeItem("token");
       navigate("/login");
     } else {
       verifyuser(dispatch)
