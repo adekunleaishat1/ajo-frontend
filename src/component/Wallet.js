@@ -107,9 +107,7 @@ const Wallet = () => {
   const payStackSuccess = (reference) => {
     const token = localStorage.getItem("token");
     try {
-      axios
-        .post(
-          "http://localhost:8888/user/verifypayment",
+      axios.post("http://localhost:8888/user/verifypayment",
           { reference },
           {
             headers: {
@@ -122,8 +120,8 @@ const Wallet = () => {
           toast.success(res.data.message);
         })
         .catch((err) => {
-          dispatch(postingFailed(err.response.data.message));
-          toast.error(err.response.data.message);
+          dispatch(postingFailed(err.response?.data.message));
+          toast.error(err.response?.data.message);
           console.log(err.message);
         });
     } catch (error) {

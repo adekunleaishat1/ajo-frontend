@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import {BiHistory, BiLogOut, BiSolidDashboard} from 'react-icons/bi'
 import {FaUsers} from 'react-icons/fa'
@@ -8,7 +8,10 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
-const Sidenav = () => {
+const Sidenav = ({showsidenav, setshowsidenav}) => {
+  const showref = useRef(null)
+   console.log(setshowsidenav);
+  // console.log(showref.current);
   const navigate = useNavigate();
   const linkStyles = {
     color: '#EFF2F9',
@@ -34,7 +37,7 @@ const Sidenav = () => {
             }
         }).then((res)=>{
             console.log(res);
-            navigate('/message') 
+            navigate('/dashboard/message') 
         }).catch((err)=>{
             console.log(err);
         })
@@ -42,35 +45,50 @@ const Sidenav = () => {
         console.log(error);
     }
    }
+    const closesidenav = () =>{
+      setshowsidenav(!showsidenav)
+    }
+    // useEffect(() => {
+    //   const handleClickOutside = (event) =>{
+    //     if (showref.current && !showref.current.contains(event.target)) {
+    //       setshowsidenav(false)
+    //     }
+    //   }
+    //     document.addEventListener("mousedown", handleClickOutside);
+    //   return () => {
+    //     document.removeEventListener("mousedown", handleClickOutside)
+    //   }
+    // }, [showref])
+    
   return (
     <>
-      <div className='side'>
+      <div ref={showref} className={showsidenav? 'side-visible' : 'side'}>
         <div className='logo'>
-
+           <img  className='img-fluid w-100' src={require('./unity (1).png')} alt="" />
         </div>
-        <div className='down'>
+        <div className='down mt-5'>
         <div className='cont-side'>
-          <Link to="/dashboard" style={linkStyles}><h1 className='fs-5 px-2'><BiSolidDashboard/></h1>  <h1 className='fs-5 fw-semibold'>Dashboard</h1></Link>
+          <Link onClick={closesidenav} to="/dashboard" style={linkStyles}><h1 className='fs-5 px-2'><BiSolidDashboard/></h1>  <h1 className='fs-5 fw-semibold'>Dashboard</h1></Link>
         </div>
-        <div className='cont-side'>
-          <Link to="group" style={linkStyles}>
+        <div onClick={closesidenav} className='cont-side'>
+          <Link  to="group" style={linkStyles}>
             <h1 className='fs-5 px-2'><FaUsers/></h1>
              <h1 className='fs-5 fw-semibold text-start'>Groups</h1>
           </Link>
         </div>
-        <div className='cont-side'>
+        <div onClick={closesidenav} className='cont-side'>
           <Link to="wallet" style={linkStyles}> <h1 className='fs-5 px-2'><GiWallet/></h1>  <h1 className='fs-5 fw-semibold text-start'>Fund Wallet</h1></Link>
         </div>
-        <div className='cont-side'>
+        <div onClick={closesidenav} className='cont-side'>
           <Link  onClick={handlenotify} style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Notifications</h1></Link>
         </div>
-        <div className='cont-side'>
+        <div onClick={closesidenav} className='cont-side'>
           <Link to="" style={linkStyles}><h1 className='fs-5 px-2'><BiHistory/></h1> <h1 className='fs-5 fw-semibold text-start'>Track payments</h1></Link>
         </div>
-        <div className='cont-side'>
+        <div onClick={closesidenav} className='cont-side'>
           <Link to="" style={linkStyles}> <h1 className='fs-5 px-2'><IoMdSettings/></h1>  <h1 className='fs-5 fw-semibold text-start'>Settings</h1></Link>
         </div>
-        <div className='cont-side'>
+        <div onClick={closesidenav} className='cont-side'>
           <Link to="" onClick={handleLogout} style={linkStyles}><h1 className='fs-5 px-2'><BiLogOut/></h1> <h1 className='fs-5 fw-semibold text-start'>Logout</h1></Link>
         </div>
         </div>

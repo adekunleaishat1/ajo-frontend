@@ -1,39 +1,57 @@
 
-import React from "react";
+import React,{useState,useEffect, useRef} from "react";
 import {BsArrowRight} from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { MdMenu } from "react-icons/md";
 
 const Home = () => {
+  const [show, setshow] = useState(false)
+  const dropref = useRef()
+  const drop = () =>{
+  setshow(!show)
+  }
+  useEffect(() => {
+    const handleClickOutside =(event) =>{
+      if (dropref.current && !dropref.current.contains(event.target)) {
+        setshow(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [dropref])
+  
   return (
     <div>
       <div className="bg-img">
-        <nav className="navbar navbar-expand-lg top-cont">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              Navbar
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+        <nav className="top-cont">
+          <div className="container-fluid d-flex justify-content-between py-2 px-2 md-px-3 ">
+            <div className="">
+              <img className="logo-img" src={require("./unity (1).png")} alt="" />  
+            </div>
+            <div className="d-flex justify-content-between align-items-center">
               <div
-                className=" d-flex justify-content-around col-3"
-                role="search"
+                className=" d-flex justify-content-around col-12 gap-5 d-none  d-md-flex" 
+                
               >
                 <Link to="/login" className="btn btn-dark btn-sm rounded-pill px-4 border-white">Log in</Link>
                 <Link to="/signup" className="btn btn-light btn-sm rounded-pill"> Create an account</Link>
+              </div>
+              <div className="d-block  d-md-none">
+                <button onClick={drop} className="navbar-toggler">
+                 <MdMenu className="navbar-toggler-icon text-white" style={{color:"white",fontSize:"20px"}}  />
+                </button>
+              </div>
+              <div ref={dropref} className={!show? "drop " : "drop2"}>
+              <div className=" mt-5 d-flex justify-content-center align-items-center mx-auto">
+               <img className="logo-img" src={require("./unity (1).png")} alt="" />  
+              </div>
+              <div className="mt-3 px-5">
+                <Link to="/login" className="btn btn-dark btn-sm rounded-pill px-4 border-white d-block">Log in</Link>
+                <Link to="/signup" className="btn btn-light btn-sm rounded-pill d-block mt-3"> Create an account</Link>
+              </div>
               </div>
             </div>
           </div>

@@ -17,6 +17,7 @@ import Resetpassword from './component/Resetpassword';
 import Setpassword from './component/Setpassword';
 import Notfound from './component/Notfound';
 import JoinGroup from './component/JoinGroup';
+import Nav from './component/Nav';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/otp' element={<Otp/>}/>
           <Route path='/reset/:inputsString' element={<Resetpassword/>}/>
           <Route path='/set' element={<Setpassword/>}/>
+          <Route path='/nav' element={<Nav/>}/>
           <Route path="/dashboard" element={<Dashboard/>}>
             <Route path="" element={<Dash/>}/>
             <Route path="wallet" element={<Wallet/>}/>

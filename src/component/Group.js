@@ -16,9 +16,8 @@ const Group = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     getThrift(dispatch);
-    console.log(isgetting);
     if (gettingerror) {
-      alert("error fetching data");
+      alert(gettingerror);
     } else {
       dispatch(getThrift)
     }
@@ -55,8 +54,8 @@ const Group = () => {
           <Preloader/>
          )
         }
-        {!allthrift? undefined : 
-        allthrift.length === 0? (
+        {
+        allthrift === null? (
           <div className="bg_img"></div>
         ) : (
           allthrift.map((el, i) => (
@@ -65,8 +64,8 @@ const Group = () => {
                 <div className="bc-img col-3">
                   <img className="img-fluid" src={el.image} alt="" />
                 </div>
-                <div className="col-6 bc-text">
-                  <h1 className="fs-5">{el.contributionname}</h1>
+                <div className="bc-text">
+                  <h1>{el.contributionname}</h1>
                   <span>{"₦" + el.amount}</span> <span>{el.plan + "pack"}</span>{" "}
                   . <span>{el.nopeople + "members"}</span>
                   {/* <Link to={`onegroup/${el._id}`}>see more</Link> */}

@@ -37,7 +37,7 @@ const Dash = () => {
                 </div>
               </div>
               <div className="text-center mt-3 p-4">
-                <h2 className="fs-3 fw-bold">${wallet}</h2>
+                <h2 className="fs-3 fw-bold">₦{wallet}</h2>
               </div>
             </div>
             <div className="money-div">
@@ -48,7 +48,7 @@ const Dash = () => {
                 </div>
               </div>
               <div className="text-center mt-3 p-4">
-                <h2 className="fs-3 fw-bold">$250.00 </h2>
+                <h2 className="fs-3 fw-bold">₦250.00 </h2>
               </div>
             </div>
             <div className="money-div">
@@ -59,7 +59,7 @@ const Dash = () => {
                 </div>
               </div>
               <div className="text-center mt-3 p-4">
-                <h2 className="fs-3 fw-bold">$250.00</h2>
+                <h2 className="fs-3 fw-bold">₦250.00</h2>
               </div>
             </div>
             <div className="money-div">
@@ -70,7 +70,7 @@ const Dash = () => {
                 </div>
               </div>
               <div className="text-center mt-3 p-4">
-                <h2 className="fs-3 fw-bold">$250.00 </h2>
+                <h2 className="fs-3 fw-bold">₦250.00 </h2>
               </div>
             </div>
           </div>

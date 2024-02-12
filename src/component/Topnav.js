@@ -7,8 +7,9 @@ import { Gettingnotifysuccessful,Markallasread } from '../Redux/Allnotification'
 import { useNavigate } from "react-router-dom";
 import { getnotification, update } from "../services/Allnotify";
 import axios from "axios";
+import Sidenav from "./Sidenav";
 
-const Topnav = () => {
+const Topnav = ({drop, showsidenav}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
@@ -21,6 +22,7 @@ const Topnav = () => {
   const [count, setcount] = useState(false)
   const [newnotification, setnewnotification] = useState([])
   const [read, setread] = useState([])
+  // const [showsidenav, setshowsidenav] = useState(false)
 
   useEffect(() => {
     setread(allnotify.filter((item)=> item.isread == false))
@@ -66,6 +68,9 @@ const Topnav = () => {
       }
       
    }
+  //  const drop = () =>{
+  //    setshowsidenav(!showsidenav)
+  //  }
 
   return (
     <>
@@ -74,9 +79,12 @@ const Topnav = () => {
           <button>
             <FaSearch />
           </button>
+          <div className="position-fixed top-0 start-0">
+           {showsidenav && <Sidenav/>}
+          </div>
           <input type="text"  placeholder="Search..." />
         </div>
-        <div className="bar">
+        <div onClick={drop} className="bar">
           <FaBars/>
         </div>
         <div className="icon-div"> 
