@@ -15,16 +15,16 @@ const Group = () => {
   
   const dispatch = useDispatch();
   useEffect(() => {
-    getThrift(dispatch);
+    // getThrift(dispatch);
     if (gettingerror) {
+      console.log(gettingerror);
       alert(gettingerror);
     } else {
       dispatch(getThrift)
     }
   }, []);
-  console.log(allthrift);
+ 
   useEffect(() => {
-   
       console.log(allthrift);
       if (allthrift) {
         console.log(allthrift);
@@ -49,15 +49,13 @@ const Group = () => {
     <>
       <div>
         {
-          isgetting &&
+          isgetting ?
          (
           <Preloader/>
-         )
-        }
-        {
-        allthrift === null? (
-          <div className="bg_img"></div>
-        ) : (
+         ) :
+        allthrift == undefined? (
+          <div className="bg_img "></div>
+        ) : ( allthrift &&
           allthrift.map((el, i) => (
             <div onClick={event => show(event, i)} className="bc mt-3 mb-3" key={i}>
               <div className="bc-iner">
@@ -68,7 +66,7 @@ const Group = () => {
                   <h1>{el.contributionname}</h1>
                   <span>{"₦" + el.amount}</span> <span>{el.plan + "pack"}</span>{" "}
                   . <span>{el.nopeople + "members"}</span>
-                  {/* <Link to={`onegroup/${el._id}`}>see more</Link> */}
+                 
                 </div>
               </div>
               <div>

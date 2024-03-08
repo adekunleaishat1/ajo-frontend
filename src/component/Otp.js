@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer } from "react-toastify";
 const Otp = () => {
   useEffect(() => {
    const otp2 = JSON.parse(localStorage.getItem("otp"))
@@ -34,7 +35,7 @@ const Otp = () => {
    const verify = () =>{
     const inputsString = inputs.join(''); 
     if (inputsString !== OTP) {
-      alert("input do not match OTP")
+      toast.error("input do not match OTP")
     }else{
       navigate(`/reset/${inputsString}`)
     }
@@ -68,6 +69,7 @@ const Otp = () => {
             </div>
             <div className="w-100 mt-3 p-2 but2">
               <button onClick={verify} className="email-but">Verify</button>
+              <ToastContainer/>
             </div>
           </div>
         </div>

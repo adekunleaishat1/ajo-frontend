@@ -4,15 +4,13 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { resetpassword } from "../services/Alluser";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import {
-  postingUser,
-  postingSuccessful,
-  postingFailed,
-} from '../Redux/AlluserSlice'
+import { ToastContainer, toast } from "react-toastify";
+
 
 
 const Resetpassword = () => {
   const navigate = useNavigate()
+  const [isloading, setisloading] = useState(false)
   const {inputsString} = useParams()
   // const opt = route
   // const { isposting, postingsuccess, postingerror } = useSelector(
@@ -24,10 +22,11 @@ const Resetpassword = () => {
   const [OTP, setOTP] = useState(inputsString);
   const [password, setpassword] = useState("");
 
-  const dispatch = useDispatch();
+  
   
 
   const reset = () => {
+    setisloading(true)
     if (password !== c_password) {
       alert("password doesn't match")
     }else{
@@ -36,20 +35,23 @@ const Resetpassword = () => {
         password: password,
       };
       try {
-        console.log(details);
-        dispatch(postingUser())
+        console.log(details)
       axios.post("https://ajo-backend.onrender.com/user/change",details)
       .then((res)=>{
-        dispatch(postingSuccessful(res.data))
-        alert("password updated successfully")
-         navigate("/set")
+        setisloading(false)
+        toast.success(res.data.message)
+        setTimeout(() => {
+          navigate("/set")
+        }, 3000);
       }).catch((err)=>{
-        dispatch(postingFailed())
+        setisloading(false)
+        toast.error(err.response.data.message)
         console.log(err);
       })
         
       } catch (error) {
         console.log(error);
+        toast.error(error)
       }
       
     }
@@ -103,6 +105,7 @@ const Resetpassword = () => {
                 <button type="button" onClick={show} className="eye">
                   {showing ? <FaEye /> : <FaEyeSlash />}
                 </button>
+                <ToastContainer/>
               </div>
             </div>
             <div className="w-100  d-flex justiify-content-center align-items-center  mt-3">
@@ -110,7 +113,7 @@ const Resetpassword = () => {
                 className="text-center btn btn-dark  mt-2 email-but"
                 onClick={reset}
               >
-                Update
+              {isloading ? "Loading..." :  "Update"}
               </button>
             </div>
           </div>

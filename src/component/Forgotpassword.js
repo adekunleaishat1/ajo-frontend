@@ -9,6 +9,7 @@ import {
   postingSuccessful,
   postingFailed,
 } from "../Redux/AlluserSlice";
+import { ToastContainer, toast } from "react-toastify";
 
 const Forgotpassword = () => {
   const { isposting, postingsuccess, postingerror } = useSelector(
@@ -17,19 +18,25 @@ const Forgotpassword = () => {
   const [email, setemail] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const sendemail = async (res) => {
+  const [isloading, setisloading] = useState(false)
+  const sendemail = async () => {
+    setisloading(true)
     console.log(email);
-    axios
+  await  axios
       .post("https://ajo-backend.onrender.com/user/reset", { email: email })
       .then((res) => {
+        setisloading(false)
         dispatch(postingSuccessful());
         localStorage.setItem("otp", JSON.stringify(res.data.OTP));
-        alert("user found");
-        navigate("/otp");
+        toast.success(res.data.message)
+        setTimeout(() => {
+          navigate("/otp");
+        }, 3000);
       })
       .catch((err) => {
-        dispatch(postingFailed(err.message));
-        alert("Error occured");
+        setisloading(false)
+        dispatch(postingFailed(err.response.data.message));
+        toast.error(err.response.data.message)
       });
     //  try {
     //  await forgotPassword(dispatch,email)
@@ -65,8 +72,9 @@ const Forgotpassword = () => {
                   <label htmlFor="email">Email </label>
                   <div className="d-flex justify-content-center align-items-center email-cont">
                     {/* <CiMail/> */}
-                    <IoMdMail />
+                    <IoMdMail size={25}/>
                     <input
+                    className="px-2"
                       name="email"
                       onChange={(e) => setemail(e.target.value)}
                       type="email"
@@ -82,6 +90,7 @@ const Forgotpassword = () => {
                     {" "}
                     Send Email
                   </div>
+                  <ToastContainer/>
                 </div>
               </form>
             </div>

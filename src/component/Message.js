@@ -21,7 +21,7 @@ const Message = () => {
  }
 
  const viewless = () =>{
-  setcurrentpage(currentpage -1)
+  setcurrentpage(currentpage - 1)
  }
 
  useEffect(() => {
@@ -40,7 +40,7 @@ const Message = () => {
  
   return (
     <>
-      <div>
+      <div className="px-2">
         <h1>
           Notification
         </h1>
@@ -56,7 +56,7 @@ const Message = () => {
               </>
             ))
            }
-           {pages.length == 5 &&
+           {pages.length == 6 &&
               
                (
                 <div className="d-flex justify-content-between align-items-center mt-1">

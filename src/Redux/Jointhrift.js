@@ -5,7 +5,8 @@ export const joinslice = createSlice({
     initialState:{
         token: null,
         isseen: false,
-        notseen: false
+        notseen: false,
+        thriftlink:null
     },
     reducers:{
         Checkingtokensuccessful:(state, action)=>{
@@ -17,9 +18,12 @@ export const joinslice = createSlice({
             state.token = action.payload
             state.isseen = false
             state.notseen = true
+        },
+        saveLinkBeforeLogin:(state, action) =>{
+            state.thriftlink = action.payload
         }
     }
 })
 
-export const { Checkingtokensuccessful,Checkingtokenfailed } = joinslice.actions
+export const { Checkingtokensuccessful,Checkingtokenfailed,saveLinkBeforeLogin } = joinslice.actions
 export default joinslice.reducer

@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { getnotification, update } from "../services/Allnotify";
 import axios from "axios";
 import Sidenav from "./Sidenav";
+import { IoMdClose } from "react-icons/io";
 
 const Topnav = ({drop, showsidenav}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
-  const {message} = useSelector((state)=> state.message)
-  console.log(message);
   const { gettingnotify,allnotify,gettingnotifyerror} =  useSelector((state) => state.Allnotification);
   console.log(allnotify);
  
@@ -33,7 +32,6 @@ const Topnav = ({drop, showsidenav}) => {
   useEffect(() => {
     if(alluser){
       setusername(alluser.username?.slice(0,1))
-      // console.log(alluser.username.slice(0,1));
     }
    
   }, [alluser]) 
@@ -68,9 +66,6 @@ const Topnav = ({drop, showsidenav}) => {
       }
       
    }
-  //  const drop = () =>{
-  //    setshowsidenav(!showsidenav)
-  //  }
 
   return (
     <>
@@ -80,7 +75,9 @@ const Topnav = ({drop, showsidenav}) => {
             <FaSearch />
           </button>
           <div className="position-fixed top-0 start-0">
-           {showsidenav && <Sidenav/>}
+           {showsidenav &&
+           
+            <Sidenav/>}
           </div>
           <input type="text"  placeholder="Search..." />
         </div>
@@ -102,8 +99,12 @@ const Topnav = ({drop, showsidenav}) => {
               <div>
                 <h1>{username}</h1>
               </div>
-              {/* <img src={require("../component/1-water-money-plant.png")} alt="" /> */}
             </div>
+            <div onClick={drop}>
+              {showsidenav &&
+              <IoMdClose />
+              }
+           </div>
 
         </div>
       </div>

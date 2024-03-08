@@ -10,6 +10,7 @@ import {
   postingFailed,
   postingUser,
 } from "../Redux/AlluserSlice";
+import {saveLinkBeforeLogin} from '../Redux/Jointhrift'
 import * as yup from "yup";
 import axios from "axios";
 import AlluserSlice from "../Redux/AlluserSlice";
@@ -20,6 +21,8 @@ const Login = () => {
   const { isposting, postingsuccess, postingerror } = useSelector(
     (state) => state.AlluserSlice
   );
+  const {thriftlink} = useSelector((state)=> state.joinslice)
+  console.log(thriftlink);
   const [showing, setshowing] = useState(false);
   const [users, setusers] = useState([]);
   const dispatch = useDispatch();
@@ -49,9 +52,14 @@ const Login = () => {
         dispatch(postingSuccessful(res.data.message));
         localStorage.setItem("token", res.data.token);
         toast.success(res.data.message)
-        setTimeout(()=>{
-          navigate("/dashboard");
-        },[5000])
+        if(thriftlink == null){
+          setTimeout(()=>{
+            navigate("/dashboard");
+          },[5000])
+        }else{
+          dispatch(saveLinkBeforeLogin(null)); // Clear saved link
+          navigate(thriftlink);
+        }
         formik.setValues({
           username: "",
           password: "",
@@ -109,7 +117,7 @@ const Login = () => {
                 onBlur={formik.handleBlur}
                 type={showing ? "text" : "password"}
               />
-              <button type="button" onClick={show} className="eye">
+              <button type="button" onClick={show} className="eye border">
                 {showing ? <FaEye /> : <FaEyeSlash />}
               </button>
               <ToastContainer/>

@@ -60,7 +60,8 @@ export const verifyuser = (dispatch) =>{
                     dispatch(FetchingSuccessful(res.data))
                 }).catch((err)=>{
                     console.log(err);
-                    dispatch(FetchingFailed(err.message))
+                    const errormessage = err?.response?.data?.message
+                    dispatch(FetchingFailed(errormessage))
                 })
         } catch (error) {
             console.log(error);
@@ -80,7 +81,8 @@ export const verifypaymemt = (dispatch, data) =>{
           console.log(res.data);
           alert("Payment Verification Successful");
         }).catch((err) => {
-          dispatch(postingFailed(err.message));
+            const errormessage = err?.response?.data?.message
+          dispatch(postingFailed(errormessage));
           console.log(err.message);
         });
       } catch (error) {
@@ -103,7 +105,8 @@ export const createThrift = (dispatch, value, token) =>{
         console.log(res.data);
         alert("payment Verification Successful");
        }).catch((err)=>{
-        dispatch(postingFailed(err.message))
+        const errormessage = err?.response?.data?.message
+        dispatch(postingFailed(errormessage))
         console.log(err);
        })
     } catch (error) {
@@ -134,8 +137,8 @@ export const createThrift = (dispatch, value, token) =>{
         dispatch(postingSuccessful("post email successfully"))
         console.log(res.data);
        }).catch((err)=>{
-        dispatch(postingFailed(err.message))
-        console.log(err);
+        const errormessage = err?.response?.data?.message
+        dispatch(postingFailed(errormessage))
        })
     } catch (error) {
         console.log(error);
@@ -151,11 +154,12 @@ export const createThrift = (dispatch, value, token) =>{
         dispatch(postingSuccessful("password reset successful"))
         console.log(res.data);
        }).catch((err)=>{
-        dispatch(postingFailed(err.message))
-        console.log(err);
+        const errormessage = err?.response?.data?.message
+        dispatch(postingFailed(errormessage))
        })
     } catch (error) {
-        console.log(error);
+        const errormessage = error?.response?.data?.message
+        dispatch(postingFailed(errormessage))
     }
  }
 

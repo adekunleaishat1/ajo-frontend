@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     console.log(alluser);
     const usertoken = localStorage.getItem("token");
-    if (!usertoken) {
+    if (!usertoken || fetchingerror) {
       console.log(fetchingerror);
       localStorage.removeItem("token");
       navigate("/login");

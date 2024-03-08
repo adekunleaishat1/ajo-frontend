@@ -17,7 +17,7 @@ console.log(token);
 export const getThrift = (dispatch) =>{
     dispatch(GettingThrift())
     try {
-       axios.get(`${endpoint}/user/contribution`,{
+  axios.get(`${endpoint}/user/contribution`,{
             headers:{
                 "Authorization":`bearer ${token}`,
                 "Content-Type": "application/json",
@@ -29,7 +29,8 @@ export const getThrift = (dispatch) =>{
         console.log(res.data);
        }).catch((err)=>{
         console.log(err);
-        dispatch(GettingFailed(err.response.data.message))
+        const errormessage = err?.response?.data?.message 
+        dispatch(GettingFailed(errormessage))
        })
     } catch (error) {
         console.log(error);
@@ -46,10 +47,12 @@ export const getOnethrift = (dispatch, id) =>{
         console.log(res.data);
        }).catch((err)=>{
         console.log(err);
-        dispatch(FetchingthriftFailed(err.message))
+        const errormessage = err?.response?.data?.message 
+        dispatch(FetchingthriftFailed(errormessage))
        })
     } catch (error) {
         console.log(error);
-        dispatch(FetchingthriftFailed(error.message))
+        const errormessage = error?.response?.data?.message 
+        dispatch(FetchingthriftFailed(errormessage))
     }
 }

@@ -77,7 +77,7 @@ const Wallet = () => {
     const token = localStorage.getItem("token");
     await axios
       .post(
-        "http://localhost:8888/user/initialize",
+        "https://ajo-backend.onrender.com/user/initialize",
         {
           email,
           name,
@@ -100,14 +100,14 @@ const Wallet = () => {
         },[3000])
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error(err.response.data?.message);
       });
   };
 
   const payStackSuccess = (reference) => {
     const token = localStorage.getItem("token");
     try {
-      axios.post("http://localhost:8888/user/verifypayment",
+      axios.post("https://ajo-backend.onrender.com/user/verifypayment",
           { reference },
           {
             headers: {
@@ -161,7 +161,7 @@ const Wallet = () => {
 
         {showFundCont ? (
           <div className="mt-5 fund-cont">
-            <div className="inp-cont">
+            {/* <div className="inp-cont"> */}
               <input
                 name={setamount}
                 onChange={(e) => setamount(e.target.value * 100)}
@@ -169,7 +169,7 @@ const Wallet = () => {
                 type="number"
                 placeholder="Amount"
               />
-            </div>
+            {/* </div> */}
             <button onClick={initialize} className="paystack">
               Fund wallet
             </button>

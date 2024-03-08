@@ -10,8 +10,7 @@ import axios from 'axios'
 
 const Sidenav = ({showsidenav, setshowsidenav}) => {
   const showref = useRef(null)
-   console.log(setshowsidenav);
-  // console.log(showref.current);
+
   const navigate = useNavigate();
   const linkStyles = {
     color: '#EFF2F9',
@@ -46,7 +45,7 @@ const Sidenav = ({showsidenav, setshowsidenav}) => {
     }
    }
     const closesidenav = () =>{
-      setshowsidenav(!showsidenav)
+      setshowsidenav(false)
     }
     // useEffect(() => {
     //   const handleClickOutside = (event) =>{

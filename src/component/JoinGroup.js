@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOnethrift } from "../services/Allthrift";
 import { useNavigate } from "react-router-dom";
-import {Checkingtokensuccessful,Checkingtokenfailed} from '../Redux/Jointhrift'
+import {Checkingtokensuccessful,Checkingtokenfailed, saveLinkBeforeLogin} from '../Redux/Jointhrift'
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
@@ -37,6 +37,7 @@ const JoinGroup = () => {
 
   const joingroup = () =>{
     if (token == null) {
+      dispatch(saveLinkBeforeLogin(window.location.pathname))
       dispatch(Checkingtokenfailed())
       toast.error("token not found")
        navigate("/login")
