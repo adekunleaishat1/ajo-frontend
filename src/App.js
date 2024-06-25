@@ -18,10 +18,14 @@ import Setpassword from './component/Setpassword';
 import Notfound from './component/Notfound';
 import JoinGroup from './component/JoinGroup';
 import Nav from './component/Nav';
+import  socketClient from 'socket.io-client'
+import { useRef } from 'react';
 
 
 
 function App() {
+  const endpoint = "http://localhost:8888"
+  const socket = useRef(socketClient(endpoint))
   return (
     <>
        <div>
@@ -42,7 +46,7 @@ function App() {
             <Route path="/dashboard/group" element={<Group/>}/>
             <Route path='/dashboard/group/thrift' element={<CreateThrift/>}/>
             <Route path='/dashboard/message' element={<Message/>}/>
-            <Route path='/dashboard/group/onegroup/:id' element={<Onegroup/>}/>
+            <Route path='/dashboard/group/onegroup/:id' element={<Onegroup socket={socket.current}/>}/>
           </Route>
        </Routes>
        </div>

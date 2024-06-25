@@ -11,9 +11,7 @@ const Dash = () => {
   const dispatch = useDispatch()
 
    useEffect(() => {
-
-      dispatch(verifyuser);
-      console.log(dispatch);
+      verifyuser(dispatch)
 
    }, [dispatch])
    

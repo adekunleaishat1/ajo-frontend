@@ -18,13 +18,16 @@ import { ToastContainer , toast} from "react-toastify";
 // import { getuser } from '../services/Alluser'
 
 const Login = () => {
-  const { isposting, postingsuccess, postingerror } = useSelector(
-    (state) => state.AlluserSlice
-  );
+  // const { isposting, postingsuccess, postingerror } = useSelector(
+  //   (state) => state.AlluserSlice
+  // );
+  const [isposting, setisposting] = useState(false)
+  console.log(isposting);
   const {thriftlink} = useSelector((state)=> state.joinslice)
   console.log(thriftlink);
   const [showing, setshowing] = useState(false);
   const [users, setusers] = useState([]);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { alluser } = useSelector((state) => state.AlluserSlice);
@@ -47,15 +50,17 @@ const Login = () => {
     onSubmit: async (value) => {
       console.log(value);
       try {
+        setisposting(true)
         dispatch(postingUser())
     await  axios.post("https://ajo-backend.onrender.com/user/login", value).then((res) => {
+      setisposting(false)
         dispatch(postingSuccessful(res.data.message));
         localStorage.setItem("token", res.data.token);
         toast.success(res.data.message)
         if(thriftlink == null){
           setTimeout(()=>{
             navigate("/dashboard");
-          },[5000])
+          },5000)
         }else{
           dispatch(saveLinkBeforeLogin(null)); // Clear saved link
           navigate(thriftlink);
@@ -65,6 +70,7 @@ const Login = () => {
           password: "",
         })
       }).catch((err)=>{
+      setisposting(false)
         dispatch(postingFailed(err.response.data.message))
         toast.error(err.response.data.message)
         formik.setValues({

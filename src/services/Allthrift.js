@@ -11,13 +11,13 @@ import {
     FetchingthriftFailed
 } from '../Redux/AllthriftSlice'
 let endpoint = "https://ajo-backend.onrender.com"
-let token = localStorage.getItem("token")
-console.log(token);
 
-export const getThrift = (dispatch) =>{
+
+export const getallThrift = async (dispatch, token) =>{
+    console.log(token);
     dispatch(GettingThrift())
     try {
-  axios.get(`${endpoint}/user/contribution`,{
+  await axios.get(`${endpoint}/user/contribution`,{
             headers:{
                 "Authorization":`bearer ${token}`,
                 "Content-Type": "application/json",
@@ -28,19 +28,21 @@ export const getThrift = (dispatch) =>{
         dispatch(GettingSuccessful(res.data.Allcontribution))
         console.log(res.data);
        }).catch((err)=>{
-        console.log(err);
         const errormessage = err?.response?.data?.message 
+        console.log(errormessage);
         dispatch(GettingFailed(errormessage))
        })
     } catch (error) {
         console.log(error);
-        dispatch(GettingFailed(error.message))
+        const errormessage = error?.response?.data?.message 
+        dispatch(GettingFailed(errormessage))
     }
 }
-export const getOnethrift = (dispatch, id) =>{
+
+export const getOnethrift = async (dispatch, id) =>{
     dispatch(FetchingThrift())
     try {
-        axios.get(`${endpoint}/user/onecontribution/${id}`) 
+      await axios.get(`${endpoint}/user/onecontribution/${id}`) 
        .then((res)=>{
         dispatch(FetchingthriftSuccessful(res.data.contribution))
         console.log(res);

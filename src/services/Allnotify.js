@@ -6,11 +6,11 @@ import {
     GettingnotifyFailed
 } from '../Redux/Allnotification'
 
-export const getnotification = (dispatch) =>{
+export const getnotification = async (dispatch) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
     try {
-        axios.get("https://ajo-backend.onrender.com/user/notify",
+     await axios.get("https://ajo-backend.onrender.com/user/notify",
         {
             headers:{
                 "Authorization":`bearer ${token}`,
@@ -22,9 +22,12 @@ export const getnotification = (dispatch) =>{
             dispatch(Gettingnotifysuccessful(res.data.notify))
         }).catch((err)=>{
             console.log(err);
-            dispatch(GettingnotifyFailed(err.message))
+            const errormessage = err?.response?.data?.message
+            dispatch(GettingnotifyFailed(errormessage))
         })
     } catch (error) {
+        const errormessage = error?.response?.data?.message
+        dispatch(GettingnotifyFailed(errormessage))
         console.log(error);
     }
  } 

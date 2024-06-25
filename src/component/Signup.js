@@ -13,7 +13,8 @@ import * as yup from 'yup'
 
 
 const Signup = () => {
-    const {isposting , postingsuccess, postingerror} = useSelector((state) => state.AlluserSlice)
+    // const {isposting , postingsuccess, postingerror} = useSelector((state) => state.AlluserSlice)
+    const [isposting, setisposting] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [username, setusername] = useState('')
@@ -58,8 +59,10 @@ const Signup = () => {
        onSubmit:async (data) =>{
         console.log(data);
         try {
+          setisposting(true)
           dispatch(postingUser())
        await axios.post("https://ajo-backend.onrender.com/user/signup", data).then((res)=>{
+          setisposting(false)
             dispatch(postingSuccessful(res.data.message))
             toast.success(res.data.message)
             setTimeout(()=>{
@@ -73,6 +76,7 @@ const Signup = () => {
             });
             console.log(formik.values);
         }).catch((err)=>{
+            setisposting(false)
             dispatch(postingFailed(err.response.data.message))
             toast.error(err.response.data.message)
             formik.setValues({

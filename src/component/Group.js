@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getThrift } from "../services/Allthrift";
+import { getallThrift } from "../services/Allthrift";
 import Preloader from "./Preloader";
 
 const Group = () => {
@@ -12,17 +12,27 @@ const Group = () => {
     (state) => state.AllthriftSlice
   );
   console.log(allthrift);
+  let token = localStorage.getItem("token")
   
   const dispatch = useDispatch();
   useEffect(() => {
-    // getThrift(dispatch);
+    getallThrift(dispatch, token)
+    // if (gettingerror) {
+    //   console.log(gettingerror);
+    //   alert(gettingerror);
+    // } else {
+     
+    // }
+  }, [dispatch, token]);
+
+  useEffect(() => {
     if (gettingerror) {
       console.log(gettingerror);
       alert(gettingerror);
-    } else {
-      dispatch(getThrift)
+      // Optionally reset the error after showing it
+      // dispatch(resetError());
     }
-  }, []);
+  }, [gettingerror]);
  
   useEffect(() => {
       console.log(allthrift);
