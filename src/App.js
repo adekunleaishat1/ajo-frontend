@@ -24,7 +24,7 @@ import { useRef } from 'react';
 
 
 function App() {
-  const endpoint = "https://ajo-frontend-teal.vercel.app"
+  const endpoint ="https://ajo-backend.onrender.com"
   const socket = useRef(socketClient(endpoint))
   return (
     <>
