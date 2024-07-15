@@ -71,7 +71,7 @@ const Topnav = ({drop, showsidenav}) => {
     <>
       <div className="topnav">
         <div className="dis-inp">
-          <button>
+          <button className="">
             <FaSearch />
           </button>
           <div className="position-fixed top-0 start-0 slide">

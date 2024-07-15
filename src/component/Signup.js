@@ -122,7 +122,7 @@ const Signup = () => {
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="password">Password</label>
                 <div className='d-flex justify-content-between align-items-center inp'>
-                 <input value={formik.values.password} name='password' id='password' onBlur={formik.handleBlur} onChange={formik.handleChange} type={showing?"text":"password"} />
+                 <input className='tw-w-[95%]' value={formik.values.password} name='password' id='password' onBlur={formik.handleBlur} onChange={formik.handleChange} type={showing?"text":"password"} />
                  <button type='button' onClick={show} className='eye'>{showing? <FaEye />: <FaEyeSlash/>}</button> 
                 </div>
                 <small className='text-danger'>{formik.touched.password && formik.errors.password? formik.errors.password : ""}</small>

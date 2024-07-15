@@ -25,6 +25,7 @@ import { useRef } from 'react';
 
 function App() {
   const endpoint ="https://ajo-backend.onrender.com"
+  // const endpoint ="http://localhost:8888"
   const socket = useRef(socketClient(endpoint))
   return (
     <>

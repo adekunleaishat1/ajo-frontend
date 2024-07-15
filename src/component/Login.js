@@ -117,7 +117,8 @@ const Login = () => {
             </label>
             <div className="d-flex justify-content-between align-items-center rounded-pill inp">
               <input
-              value={formik.values.password}
+              className="tw-w-[95%]"
+               value={formik.values.password}
                 name="password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
