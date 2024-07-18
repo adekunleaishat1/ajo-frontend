@@ -27,6 +27,7 @@ const JoinGroup = () => {
       dispatch(Checkingtokenfailed(token))
       toast.error("authentication error")
       alert("token not found")
+      navigate("/login")
     }else{
       dispatch(Checkingtokensuccessful(token))
       toast.success("authentication successful")
@@ -54,6 +55,7 @@ const JoinGroup = () => {
         console.log(res.data.message);
         toast.success(res.data.message)
         setisloading(false)
+        navigate("/dashboard")
       }).catch((err)=>{
         console.log(err.response.data.message);
         toast.error(err.response.data.message)
