@@ -887,10 +887,12 @@
   .messg{
     border-radius: 10px 10px 10px 0px;
     position: relative;
+    margin: 0;
   }
   .messg2{
     border-radius: 10px 10px 10px 0px;
     position: relative;
+    margin: 0;
   }
   .messg::after {
     content: '';
