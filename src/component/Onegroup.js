@@ -190,7 +190,7 @@ const Onegroup = ({ socket }) => {
               <FaBell />
             </div>
             <div onClick={showmessage} className="tw-pl-3">
-                {showingChat ? <SlArrowDown /> : <SlArrowUp />}
+                {showingChat ? <SlArrowDown /> : <SlArrowUp/>}
             </div>
           </div>
         </div>
