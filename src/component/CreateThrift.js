@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
-import { createThrift } from "../services/Alluser";
+import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import {  PostingthriftFailed,  PostingthriftSuccessful,  PostingThrift} from '../Redux/AllthriftSlice'
 import axios from "axios";
 
 const CreateThrift = () => {
   const {isposting, postingsuccess, postingerror} = useSelector((state)=> state.AlluserSlice);
+  const [posting, setposting]  = useState(false)
   const [contributionname, setcontributionname] = useState("");
   const [plan, setplan] = useState("");
   const [amount, setamount] = useState("");
@@ -28,14 +30,8 @@ const CreateThrift = () => {
   }
 
   const create = () =>{
-    setamount("")
-   setimage("")
-   setcontributionname("")
-   setinterest("")
-   setnopeople("")
-   setplan("")
-
-   console.log(amount);
+    setposting(true)
+   
    let value = {
     amount:Number(amount),
     contributionname:contributionname,
@@ -45,26 +41,37 @@ const CreateThrift = () => {
     image:image
    }
    let token = localStorage.getItem("token")
-  //  console.log(value);
-  //  if (postingerror) {
-  //   console.log(postingerror);
-  //   return;
-  //  }else{
-  //   //  dispatch(createThrift);
-  //   createThrift(dispatch, value, token)
-  //  }
+   dispatch(PostingThrift())
   axios.post("https://ajo-backend.onrender.com/user/contribution", value, {
     headers:{
       Authorization: `bearer ${token}`
     }
   }).then((res)=>{
-    console.log(res.data)
-    console.log(res.data.contributionLink);
+    setposting(false)
+    dispatch(PostingthriftSuccessful(res.data))
     localStorage.setItem("link",JSON.stringify(res.data))
-    alert("Thrift created successfully")
-    // navigate('/dashboard/group')
+      toast.success(res.data.message)
+       navigate('/dashboard/group')
+
+    setamount("")
+    setimage("")
+    setcontributionname("")
+    setinterest("")
+    setnopeople("")
+    setplan("")
+
   }).catch((error)=>{
-    console.log("Error:", error)
+    setposting(false)
+    dispatch(PostingthriftFailed(error.response.data.message))
+    let errormessage = error.response.data.message
+    toast.error(errormessage)
+
+    setamount("")
+    setimage("")
+    setcontributionname("")
+    setinterest("")
+    setnopeople("")
+    setplan("")
   })
   }
   return (
@@ -154,14 +161,15 @@ const CreateThrift = () => {
           </div>
 
           <div className="but mt-4">
-            <button type="button" onClick={create} className="mx-auto w-50 p-2">create</button>
+            <button type="button" onClick={create} className="mx-auto w-50 p-2">{posting? "loading..." : "create"}</button>
           </div>
-          <p className="text-center mt-2 dont">
+          <ToastContainer/>
+          {/* <p className="text-center mt-2 dont">
             Don't have an account?{" "}
             <Link className="lik" to="/signup">
               Sign Up
             </Link>{" "}
-          </p>
+          </p> */}
         </form>
       </div>
     </>

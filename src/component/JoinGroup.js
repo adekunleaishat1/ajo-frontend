@@ -14,26 +14,26 @@ const JoinGroup = () => {
   console.log(onethrift);
   const {isseen, notseen} = useSelector((state) =>state.joinslice)
   let token = localStorage.getItem("token")
-  console.log(token);
+
   const { id } = useParams();
-  console.log(id);
+
   const dispatch = useDispatch();
   useEffect(() => {
     getOnethrift(dispatch, id);
   }, [dispatch, id]);
 
-  useEffect(() => {
-    if (token == null) {
-      dispatch(Checkingtokenfailed(token))
-      toast.error("authentication error")
-      alert("token not found")
-      navigate("/login")
-    }else{
-      dispatch(Checkingtokensuccessful(token))
-      toast.success("authentication successful")
-    }
+  // useEffect(() => {
+  //   if (token == null) {
+  //     dispatch(Checkingtokenfailed(token))
+  //     toast.error("authentication error")
+  //     alert("token not found")
+  //     navigate("/login")
+  //   }else{
+  //     dispatch(Checkingtokensuccessful(token))
+  //     toast.success("authentication successful")
+  //   }
   
-  }, [])
+  // }, [])
   
 
   const joingroup = () =>{

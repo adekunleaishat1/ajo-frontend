@@ -40,12 +40,12 @@ export const AllthriftSlice = createSlice ({
             state.postingsuccess = null;
             state.postingerror = null;
         },
-        PostingSuccessful: (state, action) =>{
+        PostingthriftSuccessful: (state, action) =>{
             state.isposting = false;
             state.postingsuccess = action.payload;
             state.postingerror = null;
         },
-        PostingFailed: (state, action) =>{
+        PostingthriftFailed: (state, action) =>{
             state.isposting = false;
             state.postingsuccess = null;
             state.postingerror = action.payload;
@@ -76,8 +76,8 @@ export const AllthriftSlice = createSlice ({
 
 export default AllthriftSlice.reducer
 export const {
-    PostingFailed,
-    PostingSuccessful,
+    PostingthriftFailed,
+    PostingthriftSuccessful,
     PostingThrift,
     GettingFailed,
     GettingSuccessful,
