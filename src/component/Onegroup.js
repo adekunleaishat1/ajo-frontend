@@ -220,7 +220,7 @@ const Onegroup = ({ socket }) => {
             <div className="iner-inputcont tw-px-3 tw-py-2 tw-rounded-md tw-flex tw-item-center tw-justify-center  ">
               <input
                 placeholder="Your message"
-                value={chat}
+                value={chatmessage}
                 onChange={(e) => setchat(e.target.value)}
                 className="tw-w-[90%] tw-bg-transparent  tw-outline-none tw-inset-3 tw-rounded-md tw-placeholder-gray-400 tw-px-2"
                 type="text"
