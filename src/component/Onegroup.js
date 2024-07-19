@@ -208,7 +208,7 @@ const Onegroup = ({ socket }) => {
                       <h1 className="tw-text-[15px]">{element.userid.username?.slice(0,1)}</h1>
                     </div>
                     <div>
-                    <p className="tw-text-[15px] tw-text-[#9aacc2]">{element.userid.username}</p>
+                    {/* <p className="tw-text-[15px] tw-text-[#9aacc2]">{element.userid.username}</p> */}
                     <h1 className={isSender? "tw-font-bold tw-w-[70%] tw-min-h-[70px] messg tw-text-[12px]  tw-text-white tw-px-[8px] tw-py-3 tw-bg-[#7678ed]" : "tw-font-bold tw-w-[90%] tw-min-h-[70px] messg2 tw-text-[12px]  tw-text-black tw-px-[8px] tw-py-3 tw-bg-[#eeeef8]"}>{element.message}   <p className="mssgtime">{formattedTime}</p></h1>
                     </div>
                 </div>
