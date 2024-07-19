@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOnethrift } from "../services/Allthrift";
 import { FaFacebook, FaShare, FaTwitter, FaCopy, FaBell } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
-import { SlArrowDown } from "react-icons/sl";
+import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { BsSend } from "react-icons/bs";
 import moment from 'moment'
 
@@ -15,6 +15,7 @@ const Onegroup = ({ socket }) => {
   const [chatmessage, setchat] = useState("");
   const [allchat, setallchat] = useState([]);
   const [currentuser, setcurrentuser] = useState("")
+  const [showingChat, setshowingChat] = useState(false)
 
   let token = localStorage.getItem("token");
 
@@ -82,6 +83,10 @@ const Onegroup = ({ socket }) => {
     console.log(chat);
     setallchat([...allchat, chat]);
   });
+
+  const showmessage =() =>{
+    setshowingChat(!showingChat)
+  }
   return (
     <>
       <div className="group-cont ">
@@ -177,15 +182,15 @@ const Onegroup = ({ socket }) => {
           </div>
         </div>
       </div>
-      <div className="messagediv">
+      <div className={showingChat? "messagediv" : "messagediv2"}>
         <div className="d-flex justify-content-between align-items-center px-3 py-3 chatnav">
           <h1 className="fs-6 text-white">Chats</h1>
           <div className="tw-flex tw-justify-between tw-border tw-px-6">
             <div>
               <FaBell />
             </div>
-            <div className="tw-pl-3">
-              <SlArrowDown />
+            <div onClick={showmessage} className="tw-pl-3">
+                {showingChat ? <SlArrowDown /> : <SlArrowUp />}
             </div>
           </div>
         </div>
@@ -198,10 +203,10 @@ const Onegroup = ({ socket }) => {
                 return(
                   <div className="w-full">
                 <div className={isSender? "tw-flex-row-reverse tw-flex  tw-items-start   tw-w-full tw-gap-3 tw-mb-[10px] tw-py-2" : "tw-flex tw-items-start  tw-justify-start tw-w-full tw-gap-3 tw-mb-[10px] tw-py-2"} key={index}>
-                  <div className="tw-capitalize tw-flex tw-items-center tw-leading-none tw-justify-center  tw-w-[40px] tw-h-[40px]  tw-rounded-full tw-text-black tw-bg-[#eeeef8]">
-                     <h1 className="tw-text-[15px]">{element.userid.username?.slice(0,1)}</h1>
-                  </div>
-                  <h1 className={isSender? "tw-font-bold tw-w-[70%] tw-min-h-[70px] messg tw-text-[12px]  tw-text-white tw-px-[8px] tw-py-3 tw-bg-[#7678ed]" : "tw-font-bold tw-w-[90%] tw-min-h-[70px] messg2 tw-text-[12px]  tw-text-black tw-px-[8px] tw-py-3 tw-bg-[#eeeef8]"}>{element.message}   <p className="mssgtime">{formattedTime}</p></h1>
+                    <div className="tw-capitalize tw-flex tw-items-center tw-leading-none tw-justify-center  tw-w-[40px] tw-h-[40px]  tw-rounded-full tw-text-black tw-bg-[#eeeef8]">
+                      <h1 className="tw-text-[15px]">{element.userid.username?.slice(0,1)}</h1>
+                    </div>
+                    <h1 className={isSender? "tw-font-bold tw-w-[70%] tw-min-h-[70px] messg tw-text-[12px]  tw-text-white tw-px-[8px] tw-py-3 tw-bg-[#7678ed]" : "tw-font-bold tw-w-[90%] tw-min-h-[70px] messg2 tw-text-[12px]  tw-text-black tw-px-[8px] tw-py-3 tw-bg-[#eeeef8]"}>{element.message}   <p className="mssgtime">{formattedTime}</p></h1>
                 </div>
                   </div>
                 )
