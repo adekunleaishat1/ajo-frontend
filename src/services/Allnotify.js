@@ -7,6 +7,7 @@ import {
 } from '../Redux/Allnotification'
 
 export const getnotification = async (dispatch, socket) =>{
+    console.log(socket);
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
 

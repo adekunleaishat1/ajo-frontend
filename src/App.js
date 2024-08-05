@@ -46,7 +46,7 @@ function App() {
             <Route path="wallet" element={<Wallet/>}/>
             <Route path="/dashboard/group" element={<Group/>}/>
             <Route path='/dashboard/group/thrift' element={<CreateThrift/>}/>
-            <Route path='/dashboard/message' element={<Message/>}/>
+            <Route path='/dashboard/message' element={<Message socket={socket.current}/>}/>
             <Route path='/dashboard/group/onegroup/:id' element={<Onegroup socket={socket.current}/>}/>
           </Route>
        </Routes>

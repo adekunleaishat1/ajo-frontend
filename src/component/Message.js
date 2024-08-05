@@ -5,7 +5,8 @@ import { Markallasread } from "../Redux/Allnotification";
 import { getnotification, update } from "../services/Allnotify";
 import {AiOutlineDoubleRight, AiOutlineDoubleLeft} from 'react-icons/ai'
 
-const Message = () => {
+const Message = ({socket}) => {
+  console.log(socket);
  const dispatch = useDispatch()
  const { gettingnotify,allnotify,gettingnotifyerror,} = useSelector((state)=> state.Allnotification)
   const [Notification, setNotification] = useState([])
@@ -30,7 +31,7 @@ const Message = () => {
 
  useEffect(() => {
   //  fetchnotify()
-   getnotification(dispatch)
+   getnotification(dispatch, socket)
   
  }, [])
 
@@ -60,13 +61,10 @@ const Message = () => {
               </>
             ))
            }
-              
-               (
                 <div className="d-flex justify-content-between align-items-center mt-1">
                 <button onClick={viewless} className="btn btn-lignt rounded" disabled={currentpage === 0}><AiOutlineDoubleLeft/></button>
                 <button onClick={viewmore} className="btn btn-lignt rounded" disabled={currentpage >= totalpage - 1}><AiOutlineDoubleRight/></button>
                 </div>
-               )
         </div>
         
       </div>
