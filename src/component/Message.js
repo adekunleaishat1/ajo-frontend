@@ -17,11 +17,15 @@ const Message = () => {
   const end = start + perpage
   const pages = allnotify.slice(start, end)
  const viewmore = () =>{
-  setcurrentpage(currentpage + 1)
+  if (currentpage < totalpage - 1) {
+    setcurrentpage(currentpage + 1);
+  }
  }
 
  const viewless = () =>{
-  setcurrentpage(currentpage - 1)
+  if (currentpage > 0) {
+    setcurrentpage(currentpage - 1);
+  }
  }
 
  useEffect(() => {
@@ -56,16 +60,13 @@ const Message = () => {
               </>
             ))
            }
-           {pages.length == 6 &&
               
                (
                 <div className="d-flex justify-content-between align-items-center mt-1">
-                <button onClick={viewless} className="btn btn-lignt rounded"><AiOutlineDoubleLeft/></button>
-                <button onClick={viewmore} className="btn btn-lignt rounded"><AiOutlineDoubleRight/></button>
+                <button onClick={viewless} className="btn btn-lignt rounded" disabled={currentpage === 0}><AiOutlineDoubleLeft/></button>
+                <button onClick={viewmore} className="btn btn-lignt rounded" disabled={currentpage >= totalpage - 1}><AiOutlineDoubleRight/></button>
                 </div>
                )
-           }
-          
         </div>
         
       </div>
