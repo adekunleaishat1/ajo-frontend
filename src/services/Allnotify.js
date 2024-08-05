@@ -6,14 +6,14 @@ import {
     GettingnotifyFailed
 } from '../Redux/Allnotification'
 
-export const getnotification = async (dispatch) =>{
+export const getnotification = async (dispatch, socket) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
 
     socket.on('notification', (notification) => {
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
-    
+
     try {
      await axios.get("https://ajo-backend.onrender.com/user/notify",
         {
