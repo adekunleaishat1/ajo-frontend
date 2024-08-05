@@ -11,6 +11,7 @@ export const getnotification = async (dispatch, socket) =>{
     const token = localStorage.getItem("token");
 
     socket.on('notification', (notification) => {
+        console.log(notification.notify);
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
 
