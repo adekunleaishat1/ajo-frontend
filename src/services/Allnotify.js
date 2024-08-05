@@ -9,6 +9,11 @@ import {
 export const getnotification = async (dispatch) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
+
+    socket.on('notification', (notification) => {
+        dispatch(Gettingnotifysuccessful(notification.notify));
+    });
+    
     try {
      await axios.get("https://ajo-backend.onrender.com/user/notify",
         {

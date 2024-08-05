@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { verifyuser } from "../services/Alluser";
 import { useNavigate, Outlet } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({socket}) => {
   const [showsidenav, setshowsidenav] = useState(false)
   // const showref = useRef(null)
   const { isfetching, alluser, fetchingerror } = useSelector(
@@ -47,7 +47,7 @@ const Dashboard = () => {
     <>
       <div className="dash">
         <Sidenav showsidenav={showsidenav} setshowsidenav= {setshowsidenav}/>
-        <Topnav drop={drop} showsidenav={showsidenav} />
+        <Topnav drop={drop} showsidenav={showsidenav} socket={socket} />
         <div className="wid">
           <Outlet />
         </div>

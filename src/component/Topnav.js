@@ -10,7 +10,7 @@ import axios from "axios";
 import Sidenav from "./Sidenav";
 import { IoMdClose } from "react-icons/io";
 
-const Topnav = ({drop, showsidenav}) => {
+const Topnav = ({drop, showsidenav, socket}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
@@ -37,9 +37,9 @@ const Topnav = ({drop, showsidenav}) => {
   }, [alluser]) 
   useEffect(() => {
     
-  dispatch(getnotification)
+    getnotification(dispatch, socket);
    
-  }, [dispatch])
+  }, [dispatch, socket])
   
 
    useEffect(() => {

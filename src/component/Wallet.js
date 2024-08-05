@@ -12,7 +12,7 @@ import {
 } from "../Redux/AlluserSlice";
 
 const Wallet = () => {
-  // const publicKey = "pk_test_a937907ad423ac18d530d435f6861d460d4ad42c"
+ 
   const isPaymentInitialized = localStorage.getItem("paymentInitialized") === "true";
   const [paymentinitialized, setpaymentinitialized] = useState(false)
   const { isfetching, alluser, fetchingerror } = useSelector(
@@ -62,9 +62,9 @@ const Wallet = () => {
       payStackSuccess(reference);
     } else {
       console.error("Payment reference not found.");
-      // Handle the missing reference case
+  
     }
-    // return () => setpaymentinitialized(false);
+    
   }, [ reference]);
 
   useEffect(() => {

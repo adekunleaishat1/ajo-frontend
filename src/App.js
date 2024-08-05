@@ -41,7 +41,7 @@ function App() {
           <Route path='/reset/:inputsString' element={<Resetpassword/>}/>
           <Route path='/set' element={<Setpassword/>}/>
           <Route path='/nav' element={<Nav/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}>
+          <Route path="/dashboard" element={<Dashboard socket={socket.current}/>}>
             <Route path="" element={<Dash/>}/>
             <Route path="wallet" element={<Wallet/>}/>
             <Route path="/dashboard/group" element={<Group/>}/>

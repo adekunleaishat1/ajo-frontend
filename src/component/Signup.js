@@ -77,7 +77,7 @@ const Signup = () => {
             console.log(formik.values);
         }).catch((err)=>{
             setisposting(false)
-            dispatch(postingFailed(err.response.data.message))
+            dispatch(postingFailed(err?.response?.data?.message))
             toast.error(err.response.data.message)
             formik.setValues({
               username: "", 
@@ -89,12 +89,11 @@ const Signup = () => {
         })
         } catch (error) {
            console.log(error)
+           toast.error(error?.response?.data?.message)
         }
        }
      
     })
-    // console.log(formik.errors)
-    // console.log(formik.touched);
   return (
     <>
       <div className='content'>
@@ -107,17 +106,17 @@ const Signup = () => {
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="username">Username</label>
                <input value={formik.values.username} className='inp1' name='username' id='username' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
-               <small className='text-danger'>{formik.touched.username && formik.errors.username? formik.errors.username : ""}</small>
+               <small className='text-danger'>{formik.touched.username? formik.errors.username : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="email">Email</label>
                <input value={formik.values.email} className='inp1' name='email' id='email' onBlur={formik.handleBlur} onChange={formik.handleChange} type="text" />
-               <small className='text-danger'>{formik.touched.email && formik.errors.email? formik.errors.email : ""}</small>
+               <small className='text-danger'>{formik.touched.email ? formik.errors.email : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="bvn">Bvn</label>
                <input value={formik.values.bvn} className=' inp1' name='bvn' id='bvn' onBlur={formik.handleBlur} onChange={formik.handleChange} type="number" />
-               <small className='text-danger'>{formik.touched.bvn && formik.errors.bvn? formik.errors.bvn : ""}</small>
+               <small className='text-danger'>{formik.touched.bvn ? formik.errors.bvn : ""}</small>
             </div>
             <div className='form-group mt-3'>
                 <label className='label' htmlFor="password">Password</label>
@@ -125,7 +124,7 @@ const Signup = () => {
                  <input className='tw-w-[95%]' value={formik.values.password} name='password' id='password' onBlur={formik.handleBlur} onChange={formik.handleChange} type={showing?"text":"password"} />
                  <button type='button' onClick={show} className='eye'>{showing? <FaEye />: <FaEyeSlash/>}</button> 
                 </div>
-                <small className='text-danger'>{formik.touched.password && formik.errors.password? formik.errors.password : ""}</small>
+                <small className='text-danger'>{formik.touched.password ? formik.errors.password : ""}</small>
             </div>
             <div className='but mt-4'>
                 <button type='submit' className='mx-auto w-100 p-2'>{isposting? "Loading...": "Sign up"}</button>
