@@ -6,7 +6,11 @@ import {
     GettingnotifyFailed
 } from '../Redux/Allnotification'
 
-export const getnotification = async (dispatch, socket) =>{
+const socket = io("https://ajo-backend.onrender.com", {
+    transports: ['websocket', 'polling'],
+});
+
+export const getnotification = async (dispatch) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
     socket.emit('authenticate', token);
