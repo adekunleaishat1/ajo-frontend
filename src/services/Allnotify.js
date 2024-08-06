@@ -7,12 +7,11 @@ import {
 } from '../Redux/Allnotification'
 
 export const getnotification = async (dispatch, socket) =>{
-    console.log(socket);
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
 
     socket.on('notification', (notification) => {
-        console.log(notification.notify);
+        console.log(notification);
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
 
@@ -25,8 +24,8 @@ export const getnotification = async (dispatch, socket) =>{
                 "accept": "application/json"
              }
         }).then((res)=>{
-            console.log(res.data.notify);
-            dispatch(Gettingnotifysuccessful(res.data.notify))
+            // console.log(res.data.notify);
+            // dispatch(Gettingnotifysuccessful(res.data.notify))
         }).catch((err)=>{
             console.log(err);
             const errormessage = err?.response?.data?.message
