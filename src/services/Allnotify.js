@@ -7,7 +7,9 @@ import {
 } from '../Redux/Allnotification'
 
 const socket = io("https://ajo-backend.onrender.com", {
-    transports: ['websocket', 'polling'],
+    transports: ['websocket', 'polling'],  
+    withCredentials: true,
+    path: "/socket.io"  
 });
 
 export const getnotification = async (dispatch) =>{
