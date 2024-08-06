@@ -19,6 +19,17 @@ export const getnotification = async (dispatch) =>{
         console.log("notificatiion received");
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
+    socket.on('connect_error', (err) => {
+        console.error('Socket connection error:', err);
+        dispatch(GettingnotifyFailed('Socket connection error'));
+    });
+
+    socket.on('disconnect', (reason) => {
+        console.log('Socket disconnected:', reason);
+        if (reason === 'io server disconnect') {
+            socket.connect(); // Reconnect manually if server disconnects
+        }
+    });
 
     try {
      await axios.get("https://ajo-backend.onrender.com/user/notify",
