@@ -24,7 +24,6 @@ const Login = () => {
   const [isposting, setisposting] = useState(false)
   console.log(isposting);
   const {thriftlink} = useSelector((state)=> state.joinslice)
-  console.log(thriftlink);
   const [showing, setshowing] = useState(false);
   const [users, setusers] = useState([]);
   

@@ -13,9 +13,10 @@ import { IoMdClose } from "react-icons/io";
 const Topnav = ({drop, showsidenav, socket}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {isfetching, alluser, fetchingerror} =  useSelector((state) => state.AlluserSlice);
-  const { gettingnotify,allnotify,gettingnotifyerror} =  useSelector((state) => state.Allnotification);
+  const { alluser} =  useSelector((state) => state.AlluserSlice);
+  const {allnotify} =  useSelector((state) => state.Allnotification);
   console.log(allnotify);
+
  
   const [username, setusername] = useState("")
   const [count, setcount] = useState(false)
@@ -25,9 +26,9 @@ const Topnav = ({drop, showsidenav, socket}) => {
 
   useEffect(() => {
     setread(allnotify.filter((item)=> item.isread == false))
-    console.log(read.length);
   }, [allnotify])
   
+ 
   
   useEffect(() => {
     if(alluser){

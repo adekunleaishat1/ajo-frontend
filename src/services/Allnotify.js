@@ -9,9 +9,10 @@ import {
 export const getnotification = async (dispatch, socket) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
+    socket.emit('authenticate', token);
 
     socket.on('notification', (notification) => {
-        console.log(notification);
+        console.log("notificatiion received");
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
 
