@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { Link } from 'react-router-dom'
 import {BiHistory, BiLogOut, BiSolidDashboard} from 'react-icons/bi'
 import {FaUsers} from 'react-icons/fa'
@@ -6,9 +6,37 @@ import {GiWallet} from 'react-icons/gi'
 import {IoMdMail, IoMdSettings} from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import {useThriftContext} from '../ThriftContext'
 
 
-const Sidenav = ({showsidenav, setshowsidenav}) => {
+const Sidenav = ({showsidenav, setshowsidenav, alluser}) => {
+  const { selectedThriftId: id } = useThriftContext();
+  const [isAdmin, setIsAdmin] = useState(false);
+  let endpoint = "https://ajo-backend.onrender.com"
+
+  useEffect(() => {
+    const checkAdminRole = async () => {
+      const token = localStorage.getItem('token');
+      if (token && id) {
+        try {
+          const response = await axios.get(`${endpoint}/user/onecontribution/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          const userEmail = alluser.email; 
+          const contributionAdmin = response.data.contribution.admin;
+
+          setIsAdmin(userEmail === contributionAdmin);
+        } catch (error) {
+          console.error('Error checking admin role:', error);
+        }
+      }
+    };
+
+    checkAdminRole();
+  }, [id]);
+
+
   const showref = useRef(null)
 
   const navigate = useNavigate();
@@ -81,9 +109,17 @@ const Sidenav = ({showsidenav, setshowsidenav}) => {
         <div onClick={closesidenav} className='cont-side'>
           <Link  onClick={handlenotify} style={linkStyles}> <h1 className='fs-5 px-2'><IoMdMail/></h1>  <h1 className='fs-5 fw-semibold text-start'>Notifications</h1></Link>
         </div>
-        <div onClick={closesidenav} className='cont-side'>
+        {isAdmin && (
+          <div onClick={closesidenav} className='cont-side'>
+            <Link to="track-payments" style={linkStyles}>
+              <h1 className='fs-5 px-2'><BiHistory /></h1>
+              <h1 className='fs-5 fw-semibold text-start'>Track payments</h1>
+            </Link>
+          </div>
+        )}
+        {/* <div onClick={closesidenav} className='cont-side'>
           <Link to="" style={linkStyles}><h1 className='fs-5 px-2'><BiHistory/></h1> <h1 className='fs-5 fw-semibold text-start'>Track payments</h1></Link>
-        </div>
+        </div> */}
         <div onClick={closesidenav} className='cont-side'>
           <Link to="" style={linkStyles}> <h1 className='fs-5 px-2'><IoMdSettings/></h1>  <h1 className='fs-5 fw-semibold text-start'>Settings</h1></Link>
         </div>

@@ -9,6 +9,7 @@ import {BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux';   
 import {persistor, store} from '../src/Redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
+import {ThriftProvider} from './ThriftContext'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +18,9 @@ root.render(
      <BrowserRouter>
      <Provider store={store}>
        <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <ThriftProvider>
+           <App />
+        </ThriftProvider>
         </PersistGate>
       </Provider>
      </BrowserRouter>

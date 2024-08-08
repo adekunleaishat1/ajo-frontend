@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getallThrift } from "../services/Allthrift";
 import Preloader from "./Preloader";
+import {useThriftContext} from '../ThriftContext'
 
 const Group = () => {
   const [thrifts, setthrifts] = useState([]);
@@ -13,6 +14,8 @@ const Group = () => {
   );
   console.log(allthrift);
   let token = localStorage.getItem("token")
+
+  const { setSelectedThriftId } = useThriftContext();
   
   const dispatch = useDispatch();
   useEffect(() => {
@@ -46,12 +49,9 @@ const Group = () => {
 
   
 
-  const show = (e, i) => {
-    console.log(e.target);
-    console.log(i);
-    const clickedThrift = thrifts[i];
-    const id = clickedThrift._id
+  const show = (id) => {
     console.log(id);
+    setSelectedThriftId(id);
     navigate(`onegroup/${id}`)
   };
 
@@ -67,7 +67,7 @@ const Group = () => {
           <div className="bg_img "></div>
         ) : ( allthrift &&
           allthrift.map((el, i) => (
-            <div onClick={event => show(event, i)} className="bc mt-3 mb-3" key={i}>
+            <div onClick={()=> show(el._id)} className="bc mt-3 mb-3" key={i}>
               <div className="bc-iner">
                 <div className="bc-img col-3">
                   <img className="img-fluid" src={el.image} alt="" />

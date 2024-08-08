@@ -46,7 +46,7 @@ const Dashboard = ({socket}) => {
   return (
     <>
       <div className="dash">
-        <Sidenav showsidenav={showsidenav} setshowsidenav= {setshowsidenav}/>
+        <Sidenav showsidenav={showsidenav} setshowsidenav= {setshowsidenav} alluser={alluser}/>
         <Topnav drop={drop} showsidenav={showsidenav} socket={socket} />
         <div className="wid">
           <Outlet />
