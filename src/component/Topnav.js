@@ -11,6 +11,7 @@ import Sidenav from "./Sidenav";
 import { IoMdClose } from "react-icons/io";
 
 const Topnav = ({drop, showsidenav, socket}) => {
+  console.log(socket);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { alluser} =  useSelector((state) => state.AlluserSlice);
@@ -25,7 +26,7 @@ const Topnav = ({drop, showsidenav, socket}) => {
   // const [showsidenav, setshowsidenav] = useState(false)
 
   socket.on('notification', (notification) => {
-    console.log(notification);
+    console.log(notification,"notification received");
     dispatch(Gettingnotifysuccessful(notification.notify));
   });
 
@@ -41,8 +42,8 @@ const Topnav = ({drop, showsidenav, socket}) => {
     }
    
   }, [alluser]) 
+
   useEffect(() => {
-    
     getnotification(dispatch, socket);
    
   }, [dispatch, socket])

@@ -17,8 +17,8 @@ export const getnotification = async (dispatch, socket) =>{
     const token = localStorage.getItem("token");
     socket.emit('authenticate', token);
 
-    socket.on('notification', (notification) => {
-        console.log("notificatiion received");
+    socket.on('notification',(notification) => {
+        console.log("notificatiion received", notification);
         dispatch(Gettingnotifysuccessful(notification.notify));
     });
 
@@ -31,7 +31,6 @@ export const getnotification = async (dispatch, socket) =>{
                 "accept": "application/json"
              }
         }).then((res)=>{
-            console.log(res.data.notify);
             dispatch(Gettingnotifysuccessful(res.data.notify))
         }).catch((err)=>{
             console.log(err);
