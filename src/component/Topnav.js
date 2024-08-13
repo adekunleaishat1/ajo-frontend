@@ -11,7 +11,7 @@ import Sidenav from "./Sidenav";
 import { IoMdClose } from "react-icons/io";
 
 const Topnav = ({drop, showsidenav, socket}) => {
-  console.log(socket);
+  console.log(socket._callbacks);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { alluser} =  useSelector((state) => state.AlluserSlice);
