@@ -25,7 +25,7 @@ const Topnav = ({drop, showsidenav, socket}) => {
   // const [showsidenav, setshowsidenav] = useState(false)
 
   socket.on('notification', (notification) => {
-    console.log("notificatiion received");
+    console.log(notification);
     dispatch(Gettingnotifysuccessful(notification.notify));
   });
 

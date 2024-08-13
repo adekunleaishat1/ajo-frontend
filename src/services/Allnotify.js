@@ -31,8 +31,8 @@ export const getnotification = async (dispatch, socket) =>{
                 "accept": "application/json"
              }
         }).then((res)=>{
-            // console.log(res.data.notify);
-            // dispatch(Gettingnotifysuccessful(res.data.notify))
+            console.log(res.data.notify);
+            dispatch(Gettingnotifysuccessful(res.data.notify))
         }).catch((err)=>{
             console.log(err);
             const errormessage = err?.response?.data?.message

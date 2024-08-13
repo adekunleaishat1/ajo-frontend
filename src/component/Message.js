@@ -6,7 +6,7 @@ import { getnotification, update } from "../services/Allnotify";
 import {AiOutlineDoubleRight, AiOutlineDoubleLeft} from 'react-icons/ai'
 
 const Message = ({socket}) => {
-  console.log(socket);
+
  const dispatch = useDispatch()
  const { gettingnotify,allnotify,gettingnotifyerror,} = useSelector((state)=> state.Allnotification)
   const [Notification, setNotification] = useState([])
