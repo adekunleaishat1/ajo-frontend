@@ -6,13 +6,13 @@ import {
     GettingnotifyFailed
 } from '../Redux/Allnotification'
 
-const socket = io("https://ajo-backend.onrender.com", {
-    transports: ['websocket', 'polling'],  
-    withCredentials: true,
-    path: "/socket.io"  
-});
+// const socket = io("https://ajo-backend.onrender.com", {
+//     transports: ['websocket', 'polling'],  
+//     withCredentials: true,
+//     path: "/socket.io"  
+// });
 
-export const getnotification = async (dispatch) =>{
+export const getnotification = async (dispatch, socket) =>{
     dispatch(Gettingnotify())
     const token = localStorage.getItem("token");
     socket.emit('authenticate', token);
@@ -20,17 +20,6 @@ export const getnotification = async (dispatch) =>{
     socket.on('notification', (notification) => {
         console.log("notificatiion received");
         dispatch(Gettingnotifysuccessful(notification.notify));
-    });
-    socket.on('connect_error', (err) => {
-        console.error('Socket connection error:', err);
-        dispatch(GettingnotifyFailed('Socket connection error'));
-    });
-
-    socket.on('disconnect', (reason) => {
-        console.log('Socket disconnected:', reason);
-        if (reason === 'io server disconnect') {
-            socket.connect(); // Reconnect manually if server disconnects
-        }
     });
 
     try {
