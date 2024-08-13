@@ -23,6 +23,11 @@ const Topnav = ({drop, showsidenav, socket}) => {
   const [newnotification, setnewnotification] = useState([])
   const [read, setread] = useState([])
   // const [showsidenav, setshowsidenav] = useState(false)
+  
+  socket.on('notification', (notification) => {
+    console.log("notificatiion received");
+    dispatch(Gettingnotifysuccessful(notification.notify));
+});
 
   useEffect(() => {
     setread(allnotify.filter((item)=> item.isread == false))
